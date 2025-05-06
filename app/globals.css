@@ -1,0 +1,550 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 142.1 76.2% 36.3%;
+    --primary-foreground: 355.7 100% 97.3%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 142.1 76.2% 36.3%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 20 14.3% 4.1%;
+    --foreground: 0 0% 95%;
+    --card: 24 9.8% 10%;
+    --card-foreground: 0 0% 95%;
+    --popover: 0 0% 9%;
+    --popover-foreground: 0 0% 95%;
+    --primary: 142.1 70.6% 45.3%;
+    --primary-foreground: 144.9 80.4% 10%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 12 6.5% 15.1%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 85.7% 97.3%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 142.4 71.8% 29.2%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Print styles for PDF export */
+@media print {
+  body {
+    background-color: white !important;
+    color: black !important;
+  }
+
+  .printing-pdf {
+    background-color: white !important;
+  }
+
+  /* Hide sidebar and header when printing */
+  aside,
+  header,
+  nav,
+  button[aria-label="Toggle menu"],
+  button[aria-label="Export to PDF"],
+  a[href="/auth/login"] {
+    display: none !important;
+  }
+
+  /* Make main content full width */
+  main {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 20px !important;
+    background-color: white !important;
+    color: black !important;
+    overflow: visible !important;
+  }
+
+  /* Ensure cards are visible */
+  .bg-zinc-900,
+  .bg-zinc-950,
+  .bg-black {
+    background-color: white !important;
+    color: black !important;
+    border: 1px solid #ddd !important;
+  }
+
+  /* Improve text visibility */
+  .text-zinc-400,
+  .text-zinc-300,
+  .text-zinc-500 {
+    color: #333 !important;
+  }
+
+  .text-white {
+    color: black !important;
+  }
+
+  /* Ensure page breaks don't cut content awkwardly */
+  h1,
+  h2,
+  h3,
+  .card,
+  .grid > div {
+    page-break-inside: avoid;
+    margin-bottom: 20px;
+  }
+
+  /* Add page title */
+  body::before {
+    content: "Melanin Kapital - Due Diligence Report";
+    display: block;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+
+  /* Add page numbers */
+  @page {
+    margin: 2cm;
+    @bottom-center {
+      content: "Page " counter(page) " of " counter(pages);
+    }
+  }
+}
+
+/* Print styles */
+@media print {
+  /* Hide navigation and UI elements */
+  aside,
+  header,
+  nav,
+  .no-print,
+  button:not(.print-include) {
+    display: none !important;
+  }
+
+  /* Reset background colors for printing */
+  body,
+  main,
+  div {
+    background-color: white !important;
+    color: black !important;
+  }
+
+  /* Ensure content fits on pages properly */
+  .card,
+  .section,
+  .assessment-card {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    margin-bottom: 20px;
+  }
+
+  /* Ensure charts and visualizations print properly */
+  svg,
+  canvas,
+  .recharts-wrapper {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+
+  /* Add page breaks before major sections */
+  h1,
+  h2 {
+    break-before: page;
+    page-break-before: always;
+  }
+
+  /* First heading doesn't need a page break */
+  h1:first-child,
+  h2:first-child {
+    break-before: avoid;
+    page-break-before: avoid;
+  }
+
+  /* Ensure text is readable */
+  p,
+  li,
+  td,
+  th {
+    color: black !important;
+  }
+
+  /* Ensure tables print well */
+  table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+  }
+
+  th,
+  td {
+    border: 1px solid #ddd !important;
+  }
+
+  /* Ensure links are readable */
+  a {
+    color: #0066cc !important;
+    text-decoration: underline !important;
+  }
+
+  /* Custom class for printing */
+  .printing-pdf main {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+}
+
+/* Add these CSS rules at the end of the file for better PDF printing */
+
+/* PDF Export Styling */
+.print-instructions-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.print-instructions-content {
+  background-color: #1e1e1e;
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 24px;
+  max-width: 500px;
+  width: 90%;
+  color: #fff;
+}
+
+.print-instructions-content h2 {
+  margin-top: 0;
+  font-size: 1.5rem;
+  margin-bottom: 16px;
+  color: #fff;
+}
+
+.print-instructions-content ol {
+  margin-bottom: 20px;
+  padding-left: 24px;
+}
+
+.print-instructions-content li {
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+
+.print-instructions-content .note {
+  font-style: italic;
+  color: #aaa;
+  margin-bottom: 20px;
+}
+
+.print-instructions-content .button-container {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.print-button {
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.cancel-button {
+  background-color: transparent;
+  color: #aaa;
+  border: 1px solid #444;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Print-specific styles - preserving dark theme */
+@media print {
+  body.printing-pdf {
+    background-color: #09090b !important; /* bg-zinc-950 */
+    color: #ffffff !important;
+  }
+
+  body.printing-pdf * {
+    color-adjust: exact !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  body.printing-pdf .bg-zinc-950 {
+    background-color: #09090b !important;
+  }
+
+  body.printing-pdf .bg-zinc-900 {
+    background-color: #18181b !important;
+  }
+
+  body.printing-pdf .bg-zinc-800 {
+    background-color: #27272a !important;
+  }
+
+  body.printing-pdf .bg-black {
+    background-color: #000000 !important;
+  }
+
+  body.printing-pdf .text-white {
+    color: #ffffff !important;
+  }
+
+  body.printing-pdf .text-zinc-100 {
+    color: #f4f4f5 !important;
+  }
+
+  body.printing-pdf .text-zinc-200 {
+    color: #e4e4e7 !important;
+  }
+
+  body.printing-pdf .text-zinc-300 {
+    color: #d4d4d8 !important;
+  }
+
+  body.printing-pdf .text-zinc-400 {
+    color: #a1a1aa !important;
+  }
+
+  body.printing-pdf .text-zinc-500 {
+    color: #71717a !important;
+  }
+
+  body.printing-pdf .text-zinc-600 {
+    color: #52525b !important;
+  }
+
+  body.printing-pdf .border-zinc-800 {
+    border-color: #27272a !important;
+  }
+
+  body.printing-pdf .border-zinc-700 {
+    border-color: #3f3f46 !important;
+  }
+
+  body.printing-pdf header,
+  body.printing-pdf aside,
+  body.printing-pdf nav,
+  body.printing-pdf footer,
+  body.printing-pdf button:not(.print-button):not(.cancel-button) {
+    display: none !important;
+  }
+
+  body.printing-pdf main {
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+  }
+
+  body.printing-pdf .card {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    border: 1px solid #ddd !important;
+    margin-bottom: 20px !important;
+    background-color: white !important;
+  }
+
+  body.printing-pdf .print-page-break {
+    page-break-before: always;
+  }
+
+  body.printing-pdf .print-header {
+    position: relative;
+    padding: 16px 0;
+    margin-bottom: 24px;
+    border-bottom: 1px solid #27272a;
+    background-color: #18181b !important;
+  }
+
+  body.printing-pdf .print-header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 16px;
+  }
+
+  body.printing-pdf .print-header-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #ffffff !important;
+  }
+
+  body.printing-pdf .print-header-logo {
+    height: 40px;
+  }
+
+  body.printing-pdf .print-header-logo img {
+    height: 100%;
+    width: auto;
+  }
+
+  /* Fix for charts and visualizations */
+  body.printing-pdf svg,
+  body.printing-pdf canvas {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+
+  /* Ensure expanded content is visible */
+  body.printing-pdf [class*="max-h-0"] {
+    max-height: none !important;
+    height: auto !important;
+    overflow: visible !important;
+    padding: 12px !important;
+  }
+
+  /* Make sure tab content is visible */
+  body.printing-pdf [role="tabpanel"] {
+    display: block !important;
+    visibility: visible !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  /* Hide tab navigation in print */
+  body.printing-pdf [role="tablist"] {
+    display: none !important;
+  }
+
+  /* Add section titles for tabs */
+  body.printing-pdf [role="tabpanel"]::before {
+    content: attr(aria-labelledby);
+    display: block;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #eee;
+  }
+
+  /* Ensure charts and data visualizations are visible in dark theme */
+  body.printing-pdf .recharts-surface {
+    background-color: transparent !important;
+  }
+
+  body.printing-pdf .recharts-text {
+    fill: #a1a1aa !important;
+  }
+
+  body.printing-pdf .recharts-cartesian-grid-horizontal line,
+  body.printing-pdf .recharts-cartesian-grid-vertical line {
+    stroke: #3f3f46 !important;
+  }
+
+  body.printing-pdf .recharts-tooltip-wrapper {
+    background-color: #18181b !important;
+    border-color: #3f3f46 !important;
+  }
+
+  /* Ensure cards and sections stand out properly */
+  body.printing-pdf .card {
+    background-color: #18181b !important;
+    border: 1px solid #27272a !important;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5) !important;
+  }
+
+  /* Ensure buttons and interactive elements are visible */
+  body.printing-pdf button,
+  body.printing-pdf .button {
+    background-color: #27272a !important;
+    border-color: #3f3f46 !important;
+    color: #ffffff !important;
+  }
+
+  body.printing-pdf button.bg-primary,
+  body.printing-pdf .button.bg-primary {
+    background-color: hsl(142.1, 70.6%, 45.3%) !important;
+    color: hsl(144.9, 80.4%, 10%) !important;
+  }
+}
+
+/* PNG Export Styling */
+.export-container {
+  background-color: #09090b;
+}
+
+.export-options {
+  margin-bottom: 20px;
+}
+
+.export-options .option {
+  margin-bottom: 10px;
+}
+
+.export-options label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.export-options input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+}
+
+.export-options select {
+  background-color: #27272a;
+  color: #ffffff;
+  border: 1px solid #3f3f46;
+  padding: 4px 8px;
+  border-radius: 4px;
+  margin-left: 8px;
+}
+
+.loading-spinner {
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  border-top: 3px solid #2563eb;
+  width: 24px;
+  height: 24px;
+  animation: spin 1s linear infinite;
+  margin: 20px auto;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
