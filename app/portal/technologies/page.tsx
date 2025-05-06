@@ -3,7 +3,6 @@
 import { useState } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Progress } from "@/components/ui/progress"
 import {
   Server,
   Shield,
@@ -15,24 +14,27 @@ import {
   ChevronDown,
   ChevronUp,
   Cloud,
-  Lock,
-  Router,
-  Box,
   BarChart,
-  Repeat,
   HardDrive,
-  Archive,
   Building,
   ArrowRight,
+  Cpu,
+  Globe,
+  Layers,
+  Monitor,
+  MessageSquare,
+  Brain,
+  FileText,
+  Key,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 export default function TechnologiesPage() {
   const [expandedSections, setExpandedSections] = useState({
     infrastructure: true,
-    security: false,
-    applicationStack: false,
-    blockchain: false,
+    backend: false,
+    frontend: false,
+    ai: false,
     database: false,
     integration: false,
   })
@@ -48,7 +50,7 @@ export default function TechnologiesPage() {
     <div className="space-y-6">
       <div>
         <h1 className="text-2xl font-bold tracking-tight text-white">Technology Stack</h1>
-        <p className="text-zinc-400">Overview of the technologies powering Melanin Kapital's platform</p>
+        <p className="text-zinc-400">Overview of the technologies powering Emata's platform</p>
       </div>
 
       {/* Tech Stack Overview */}
@@ -75,7 +77,7 @@ export default function TechnologiesPage() {
                 strokeWidth="2"
               />
               <text x="400" y="310" textAnchor="middle" fill="#FFFFFF" fontSize="14" fontWeight="bold">
-                AWS Infrastructure (EC2, Fargate, S3, Aurora DB, CloudWatch, SNS)
+                AWS & Azure Infrastructure (EC2, S3, Kubernetes, Azure ML)
               </text>
 
               {/* Security Layer */}
@@ -90,10 +92,10 @@ export default function TechnologiesPage() {
                 strokeWidth="2"
               />
               <text x="400" y="245" textAnchor="middle" fill="#FFFFFF" fontSize="14" fontWeight="bold">
-                Security (IAM, TLS Encryption, Routing Security)
+                Security (VPN, VPC, Keycloak)
               </text>
 
-              {/* Application Stack */}
+              {/* Backend Layer */}
               <rect
                 x="140"
                 y="160"
@@ -105,7 +107,7 @@ export default function TechnologiesPage() {
                 strokeWidth="2"
               />
               <text x="400" y="185" textAnchor="middle" fill="#FFFFFF" fontSize="14" fontWeight="bold">
-                Application Stack (AWS Fargate, ECR, Auto-scaling)
+                Backend (C#, ASP.NET Core, Microservices)
               </text>
 
               {/* Database Layer */}
@@ -120,10 +122,10 @@ export default function TechnologiesPage() {
                 strokeWidth="2"
               />
               <text x="260" y="125" textAnchor="middle" fill="#FFFFFF" fontSize="14" fontWeight="bold">
-                Database (Aurora, RDS)
+                Database (PostgreSQL, SQLite)
               </text>
 
-              {/* Blockchain Layer */}
+              {/* AI Layer */}
               <rect
                 x="440"
                 y="100"
@@ -135,10 +137,10 @@ export default function TechnologiesPage() {
                 strokeWidth="2"
               />
               <text x="540" y="125" textAnchor="middle" fill="#FFFFFF" fontSize="14" fontWeight="bold">
-                Blockchain (DFNS, Polygon)
+                AI & Analytics (Azure ML, Python)
               </text>
 
-              {/* Integration Layer */}
+              {/* Frontend Layer */}
               <rect
                 x="300"
                 y="40"
@@ -150,7 +152,7 @@ export default function TechnologiesPage() {
                 strokeWidth="2"
               />
               <text x="400" y="65" textAnchor="middle" fill="#FFFFFF" fontSize="14" fontWeight="bold">
-                Ecobank Integration
+                Frontend (Blazor, MAUI, WhatsApp)
               </text>
 
               {/* Connecting Lines */}
@@ -178,7 +180,7 @@ export default function TechnologiesPage() {
               <ChevronDown className="h-5 w-5 text-zinc-400" />
             )}
           </CardTitle>
-          <CardDescription>AWS Managed Services (EC2, Fargate, S3, Aurora DB, CloudWatch, SNS)</CardDescription>
+          <CardDescription>Cloud Hosting and Network Security</CardDescription>
         </CardHeader>
         <CardContent
           className={cn(
@@ -187,91 +189,76 @@ export default function TechnologiesPage() {
           )}
         >
           <div className="overflow-hidden">
-            <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
               <Card className="border-zinc-800 bg-zinc-800/50">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm">
                     <div className="flex items-center">
                       <Cloud className="mr-2 h-4 w-4 text-blue-500" />
-                      AWS Fargate & EC2
+                      Cloud Hosting
                     </div>
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-xs text-zinc-400">
-                    Transitioning from EC2 instances to AWS Fargate for serverless container management to reduce
-                    overhead and improve scalability.
+                    <strong>Primary Cloud:</strong> AWS (Amazon Web Services)
                   </p>
-                  <div className="mt-4">
-                    <div className="mb-1 flex items-center justify-between">
-                      <div className="text-xs text-zinc-400">Transition Progress</div>
-                      <div className="text-xs text-zinc-400">60%</div>
-                    </div>
-                    <Progress value={60} className="h-1.5" />
-                  </div>
-                  <div className="mt-4 flex items-center gap-2">
-                    <AlertTriangle className="h-4 w-4 text-yellow-500" />
-                    <p className="text-xs text-yellow-500">Single-AZ deployment limits fault tolerance</p>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card className="border-zinc-800 bg-zinc-800/50">
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-sm">
-                    <div className="flex items-center">
-                      <Database className="mr-2 h-4 w-4 text-blue-500" />
-                      AWS S3 & Aurora DB
-                    </div>
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-xs text-zinc-400">
-                    S3 for object storage and Aurora DB as a cost-effective managed database replacing RDS, providing
-                    improved performance and scalability.
+                  <p className="mt-2 text-xs text-zinc-400">
+                    Services hosted using EC2 (compute), S3 (storage), Kubernetes (orchestration).
                   </p>
-                  <div className="mt-4">
-                    <div className="mb-1 flex items-center justify-between">
-                      <div className="text-xs text-zinc-400">Aurora Migration</div>
-                      <div className="text-xs text-zinc-400">75%</div>
-                    </div>
-                    <Progress value={75} className="h-1.5" />
-                  </div>
-                  <div className="mt-4 flex items-center gap-2">
-                    <CheckCircle className="h-4 w-4 text-green-500" />
-                    <p className="text-xs text-green-500">Improved performance with Aurora</p>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card className="border-zinc-800 bg-zinc-800/50">
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-sm">
-                    <div className="flex items-center">
-                      <BarChart className="mr-2 h-4 w-4 text-blue-500" />
-                      CloudWatch & SNS
-                    </div>
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-xs text-zinc-400">
-                    CloudWatch for monitoring and logging application performance, and SNS for sending alerts for
-                    critical system events like auto-scaling notifications.
+                  <p className="mt-2 text-xs text-zinc-400">
+                    <strong>AI/ML Infrastructure:</strong> Azure
+                  </p>
+                  <p className="mt-2 text-xs text-zinc-400">
+                    Azure ML Studio, Key Vault, Application Insights, Azure Container Registry, and storage accounts
+                    used by the Data Science team.
                   </p>
                   <div className="mt-4 flex flex-wrap gap-2">
                     <Badge variant="outline" className="bg-zinc-700 text-xs">
-                      Performance Monitoring
+                      AWS
                     </Badge>
                     <Badge variant="outline" className="bg-zinc-700 text-xs">
-                      Alerts
+                      EC2
                     </Badge>
                     <Badge variant="outline" className="bg-zinc-700 text-xs">
-                      Auto-scaling Notifications
+                      S3
+                    </Badge>
+                    <Badge variant="outline" className="bg-zinc-700 text-xs">
+                      Kubernetes
+                    </Badge>
+                    <Badge variant="outline" className="bg-zinc-700 text-xs">
+                      Azure
                     </Badge>
                   </div>
-                  <div className="mt-4 flex items-center gap-2">
-                    <AlertTriangle className="h-4 w-4 text-yellow-500" />
-                    <p className="text-xs text-yellow-500">AWS cost management is a risk</p>
+                </CardContent>
+              </Card>
+
+              <Card className="border-zinc-800 bg-zinc-800/50">
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-sm">
+                    <div className="flex items-center">
+                      <Shield className="mr-2 h-4 w-4 text-blue-500" />
+                      Network Security
+                    </div>
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-xs text-zinc-400">
+                    VPN-based access control for production applications and databases.
+                  </p>
+                  <p className="mt-2 text-xs text-zinc-400">
+                    Databases and services behind VPCs; selective VPN required for admin-level access.
+                  </p>
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    <Badge variant="outline" className="bg-zinc-700 text-xs">
+                      VPN
+                    </Badge>
+                    <Badge variant="outline" className="bg-zinc-700 text-xs">
+                      VPC
+                    </Badge>
+                    <Badge variant="outline" className="bg-zinc-700 text-xs">
+                      Access Control
+                    </Badge>
                   </div>
                 </CardContent>
               </Card>
@@ -280,231 +267,26 @@ export default function TechnologiesPage() {
         </CardContent>
       </Card>
 
-      {/* Security */}
+      {/* Backend */}
       <Card className="border-zinc-800 bg-zinc-900">
-        <CardHeader className="cursor-pointer" onClick={() => toggleSection("security")}>
+        <CardHeader className="cursor-pointer" onClick={() => toggleSection("backend")}>
           <CardTitle className="flex items-center justify-between">
             <div className="flex items-center">
-              <Shield className="mr-2 h-5 w-5 text-purple-500" />
-              Security
+              <Cpu className="mr-2 h-5 w-5 text-green-500" />
+              Backend
             </div>
-            {expandedSections.security ? (
+            {expandedSections.backend ? (
               <ChevronUp className="h-5 w-5 text-zinc-400" />
             ) : (
               <ChevronDown className="h-5 w-5 text-zinc-400" />
             )}
           </CardTitle>
-          <CardDescription>IAM, TLS Encryption, and Routing Security</CardDescription>
+          <CardDescription>Programming Languages, Frameworks, and Microservices Architecture</CardDescription>
         </CardHeader>
         <CardContent
           className={cn(
             "grid gap-4 overflow-hidden transition-all duration-300",
-            expandedSections.security ? "grid-rows-[1fr]" : "grid-rows-[0fr]",
-          )}
-        >
-          <div className="overflow-hidden">
-            <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-              <Card className="border-zinc-800 bg-zinc-800/50">
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-sm">
-                    <div className="flex items-center">
-                      <Lock className="mr-2 h-4 w-4 text-purple-500" />
-                      IAM (Identity and Access Management)
-                    </div>
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-xs text-zinc-400">
-                    IAM is used to manage access control across AWS services, providing role-based access to users and
-                    services.
-                  </p>
-                  <div className="mt-4">
-                    <div className="mb-1 flex items-center justify-between">
-                      <div className="text-xs text-zinc-400">Security Maturity</div>
-                      <div className="text-xs text-zinc-400">Basic</div>
-                    </div>
-                    <Progress value={40} className="h-1.5" />
-                  </div>
-                  <div className="mt-4 flex items-center gap-2">
-                    <AlertTriangle className="h-4 w-4 text-yellow-500" />
-                    <p className="text-xs text-yellow-500">Needs MFA and more granular RBAC</p>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card className="border-zinc-800 bg-zinc-800/50">
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-sm">
-                    <div className="flex items-center">
-                      <Shield className="mr-2 h-4 w-4 text-purple-500" />
-                      TLS Encryption
-                    </div>
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-xs text-zinc-400">
-                    TLS encryption ensures secure communication between users and the platform, protecting data during
-                    transmission.
-                  </p>
-                  <div className="mt-4">
-                    <div className="mb-1 flex items-center justify-between">
-                      <div className="text-xs text-zinc-400">Implementation</div>
-                      <div className="text-xs text-zinc-400">Standard</div>
-                    </div>
-                    <Progress value={70} className="h-1.5" />
-                  </div>
-                  <div className="mt-4 flex items-center gap-2">
-                    <AlertTriangle className="h-4 w-4 text-yellow-500" />
-                    <p className="text-xs text-yellow-500">Broader security controls needed for tokenized data</p>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card className="border-zinc-800 bg-zinc-800/50">
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-sm">
-                    <div className="flex items-center">
-                      <Router className="mr-2 h-4 w-4 text-purple-500" />
-                      Routing Security
-                    </div>
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-xs text-zinc-400">
-                    Routing security protects traffic flow into and out of containers and the application, ensuring only
-                    authorized traffic is allowed.
-                  </p>
-                  <div className="mt-4">
-                    <div className="mb-1 flex items-center justify-between">
-                      <div className="text-xs text-zinc-400">Security Level</div>
-                      <div className="text-xs text-zinc-400">Basic</div>
-                    </div>
-                    <Progress value={50} className="h-1.5" />
-                  </div>
-                  <div className="mt-4 flex items-center gap-2">
-                    <AlertTriangle className="h-4 w-4 text-yellow-500" />
-                    <p className="text-xs text-yellow-500">Need VPCs for private networking as platform grows</p>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Application Stack */}
-      <Card className="border-zinc-800 bg-zinc-900">
-        <CardHeader className="cursor-pointer" onClick={() => toggleSection("applicationStack")}>
-          <CardTitle className="flex items-center justify-between">
-            <div className="flex items-center">
-              <Code className="mr-2 h-5 w-5 text-green-500" />
-              Application Stack
-            </div>
-            {expandedSections.applicationStack ? (
-              <ChevronUp className="h-5 w-5 text-zinc-400" />
-            ) : (
-              <ChevronDown className="h-5 w-5 text-zinc-400" />
-            )}
-          </CardTitle>
-          <CardDescription>AWS Fargate, ECR, Auto-scaling & Load Balancers</CardDescription>
-        </CardHeader>
-        <CardContent
-          className={cn(
-            "grid gap-4 overflow-hidden transition-all duration-300",
-            expandedSections.applicationStack ? "grid-rows-[1fr]" : "grid-rows-[0fr]",
-          )}
-        >
-          <div className="overflow-hidden">
-            <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-              <Card className="border-zinc-800 bg-zinc-800/50">
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-sm">
-                    <div className="flex items-center">
-                      <Box className="mr-2 h-4 w-4 text-green-500" />
-                      AWS Fargate
-                    </div>
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-xs text-zinc-400">
-                    Fargate helps in container management by automating the process of scaling containers, enabling more
-                    cost-effective and scalable serverless applications.
-                  </p>
-                  <div className="mt-4 flex items-center gap-2">
-                    <AlertTriangle className="h-4 w-4 text-yellow-500" />
-                    <p className="text-xs text-yellow-500">Transition from EC2 must be managed carefully</p>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card className="border-zinc-800 bg-zinc-800/50">
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-sm">
-                    <div className="flex items-center">
-                      <Database className="mr-2 h-4 w-4 text-green-500" />
-                      AWS ECR (Elastic Container Registry)
-                    </div>
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-xs text-zinc-400">
-                    ECR is used for container image storage, helping to store and manage Docker images for easier
-                    application deployment within containers.
-                  </p>
-                  <div className="mt-4 flex items-center gap-2">
-                    <AlertTriangle className="h-4 w-4 text-yellow-500" />
-                    <p className="text-xs text-yellow-500">Manual image storage needs CI/CD automation</p>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card className="border-zinc-800 bg-zinc-800/50">
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-sm">
-                    <div className="flex items-center">
-                      <BarChart className="mr-2 h-4 w-4 text-green-500" />
-                      Auto-scaling & Load Balancers
-                    </div>
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-xs text-zinc-400">
-                    Auto-scaling adjusts the number of Fargate tasks based on resource demand (CPU, RAM), ensuring the
-                    application can scale dynamically to meet user traffic.
-                  </p>
-                  <div className="mt-4 flex items-center gap-2">
-                    <AlertTriangle className="h-4 w-4 text-yellow-500" />
-                    <p className="text-xs text-yellow-500">
-                      Limited to horizontal/vertical scaling with no cost management
-                    </p>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Blockchain and Tokenization */}
-      <Card className="border-zinc-800 bg-zinc-900">
-        <CardHeader className="cursor-pointer" onClick={() => toggleSection("blockchain")}>
-          <CardTitle className="flex items-center justify-between">
-            <div className="flex items-center">
-              <Repeat className="mr-2 h-5 w-5 text-pink-500" />
-              Blockchain and Tokenization
-            </div>
-            {expandedSections.blockchain ? (
-              <ChevronUp className="h-5 w-5 text-zinc-400" />
-            ) : (
-              <ChevronDown className="h-5 w-5 text-zinc-400" />
-            )}
-          </CardTitle>
-          <CardDescription>DFNS & Polygon for Carbon Credit Tokenization and Smart Contracts</CardDescription>
-        </CardHeader>
-        <CardContent
-          className={cn(
-            "grid gap-4 overflow-hidden transition-all duration-300",
-            expandedSections.blockchain ? "grid-rows-[1fr]" : "grid-rows-[0fr]",
+            expandedSections.backend ? "grid-rows-[1fr]" : "grid-rows-[0fr]",
           )}
         >
           <div className="overflow-hidden">
@@ -513,30 +295,37 @@ export default function TechnologiesPage() {
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm">
                     <div className="flex items-center">
-                      <Repeat className="mr-2 h-4 w-4 text-pink-500" />
-                      DFNS & Polygon
+                      <Code className="mr-2 h-4 w-4 text-green-500" />
+                      Programming & Frameworks
                     </div>
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-xs text-zinc-400">
-                    DFNS is used for custodial wallet management, ensuring carbon credit tokens (MLN CARBON) are
-                    securely stored and administered through API calls.
+                    <strong>Programming Language:</strong> C#
                   </p>
                   <p className="mt-2 text-xs text-zinc-400">
-                    Polygon is the blockchain network used for minting and burning carbon credit tokens, with one token
-                    equaling one carbon credit.
+                    <strong>Frameworks:</strong> ASP.NET Core (.NET 8), RESTful APIs
                   </p>
-                  <div className="mt-4">
-                    <div className="mb-1 flex items-center justify-between">
-                      <div className="text-xs text-zinc-400">Transaction Volume</div>
-                      <div className="text-xs text-zinc-400">Very Low (3 transactions)</div>
-                    </div>
-                    <Progress value={5} className="h-1.5" />
-                  </div>
-                  <div className="mt-4 flex items-center gap-2">
-                    <AlertTriangle className="h-4 w-4 text-yellow-500" />
-                    <p className="text-xs text-yellow-500">Manual token minting process is a bottleneck</p>
+                  <p className="mt-2 text-xs text-zinc-400">
+                    <strong>Workflow Orchestration:</strong> Conductor OSS
+                  </p>
+                  <p className="mt-2 text-xs text-zinc-400">
+                    <strong>Background Processing:</strong> Hangfire
+                  </p>
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    <Badge variant="outline" className="bg-zinc-700 text-xs">
+                      C#
+                    </Badge>
+                    <Badge variant="outline" className="bg-zinc-700 text-xs">
+                      ASP.NET Core
+                    </Badge>
+                    <Badge variant="outline" className="bg-zinc-700 text-xs">
+                      .NET 8
+                    </Badge>
+                    <Badge variant="outline" className="bg-zinc-700 text-xs">
+                      RESTful APIs
+                    </Badge>
                   </div>
                 </CardContent>
               </Card>
@@ -545,30 +334,26 @@ export default function TechnologiesPage() {
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm">
                     <div className="flex items-center">
-                      <Code className="mr-2 h-4 w-4 text-pink-500" />
-                      Smart Contracts
+                      <Layers className="mr-2 h-4 w-4 text-green-500" />
+                      Microservices Architecture
                     </div>
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-xs text-zinc-400">
-                    Smart contracts govern the minting and burning of tokens, ensuring transparency in the carbon credit
-                    process and linking it to real-world carbon offset actions.
+                  <p className="text-xs text-zinc-400">Services include:</p>
+                  <ul className="mt-2 list-disc pl-4 text-xs text-zinc-400">
+                    <li>BackOffice API</li>
+                    <li>Sync Service</li>
+                    <li>LoanBook API</li>
+                    <li>Notification API</li>
+                    <li>Ledger API</li>
+                    <li>Payments API</li>
+                    <li>Auth API</li>
+                  </ul>
+                  <p className="mt-2 text-xs text-zinc-400">
+                    Each service is modular and designed for reuse across contexts (e.g., dairy, crop loans, trader
+                    finance).
                   </p>
-                  <div className="mt-4 space-y-2">
-                    <div className="flex items-center gap-2">
-                      <AlertTriangle className="h-4 w-4 text-yellow-500" />
-                      <p className="text-xs text-yellow-500">Manual token minting and burning processes</p>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <AlertTriangle className="h-4 w-4 text-yellow-500" />
-                      <p className="text-xs text-yellow-500">Lack of decentralization in token control</p>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <AlertTriangle className="h-4 w-4 text-yellow-500" />
-                      <p className="text-xs text-yellow-500">No maximum supply set for the token</p>
-                    </div>
-                  </div>
                 </CardContent>
               </Card>
             </div>
@@ -576,13 +361,192 @@ export default function TechnologiesPage() {
         </CardContent>
       </Card>
 
-      {/* Database */}
+      {/* Frontend & Applications */}
+      <Card className="border-zinc-800 bg-zinc-900">
+        <CardHeader className="cursor-pointer" onClick={() => toggleSection("frontend")}>
+          <CardTitle className="flex items-center justify-between">
+            <div className="flex items-center">
+              <Monitor className="mr-2 h-5 w-5 text-green-400" />
+              Frontend & Applications
+            </div>
+            {expandedSections.frontend ? (
+              <ChevronUp className="h-5 w-5 text-zinc-400" />
+            ) : (
+              <ChevronDown className="h-5 w-5 text-zinc-400" />
+            )}
+          </CardTitle>
+          <CardDescription>User Interfaces and Applications</CardDescription>
+        </CardHeader>
+        <CardContent
+          className={cn(
+            "grid gap-4 overflow-hidden transition-all duration-300",
+            expandedSections.frontend ? "grid-rows-[1fr]" : "grid-rows-[0fr]",
+          )}
+        >
+          <div className="overflow-hidden">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+              <Card className="border-zinc-800 bg-zinc-800/50">
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-sm">
+                    <div className="flex items-center">
+                      <Globe className="mr-2 h-4 w-4 text-green-400" />
+                      Core Interfaces
+                    </div>
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-xs text-zinc-400">
+                    <strong>Core Interface Framework:</strong> Blazor WebAssembly (SPA)
+                  </p>
+                  <p className="mt-2 text-xs text-zinc-400">
+                    <strong>Desktop Interface:</strong> .NET MAUI (used for offline CoopMIS deployments)
+                  </p>
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    <Badge variant="outline" className="bg-zinc-700 text-xs">
+                      Blazor WebAssembly
+                    </Badge>
+                    <Badge variant="outline" className="bg-zinc-700 text-xs">
+                      .NET MAUI
+                    </Badge>
+                    <Badge variant="outline" className="bg-zinc-700 text-xs">
+                      SPA
+                    </Badge>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card className="border-zinc-800 bg-zinc-800/50">
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-sm">
+                    <div className="flex items-center">
+                      <MessageSquare className="mr-2 h-4 w-4 text-green-400" />
+                      Applications & Chatbot
+                    </div>
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-xs text-zinc-400">
+                    <strong>Internal Tools:</strong>
+                  </p>
+                  <ul className="mt-1 list-disc pl-4 text-xs text-zinc-400">
+                    <li>BackOffice: Loan configuration, partner management, and credit limit loading</li>
+                    <li>LoanBook: Ledger of loan disbursements and repayments</li>
+                    <li>Notification & Payment APIs: Manages SMS, email, and mobile money interactions</li>
+                  </ul>
+                  <p className="mt-2 text-xs text-zinc-400">
+                    <strong>Chatbot:</strong> WhatsApp chatbot built on Meta's Cloud API, used for:
+                  </p>
+                  <ul className="mt-1 list-disc pl-4 text-xs text-zinc-400">
+                    <li>Loan requests</li>
+                    <li>Farmer credit limit lookups</li>
+                    <li>Repayment tracking</li>
+                  </ul>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* AI, Data & Analytics */}
+      <Card className="border-zinc-800 bg-zinc-900">
+        <CardHeader className="cursor-pointer" onClick={() => toggleSection("ai")}>
+          <CardTitle className="flex items-center justify-between">
+            <div className="flex items-center">
+              <Brain className="mr-2 h-5 w-5 text-pink-500" />
+              AI, Data & Analytics
+            </div>
+            {expandedSections.ai ? (
+              <ChevronUp className="h-5 w-5 text-zinc-400" />
+            ) : (
+              <ChevronDown className="h-5 w-5 text-zinc-400" />
+            )}
+          </CardTitle>
+          <CardDescription>Machine Learning Tools and Capabilities</CardDescription>
+        </CardHeader>
+        <CardContent
+          className={cn(
+            "grid gap-4 overflow-hidden transition-all duration-300",
+            expandedSections.ai ? "grid-rows-[1fr]" : "grid-rows-[0fr]",
+          )}
+        >
+          <div className="overflow-hidden">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+              <Card className="border-zinc-800 bg-zinc-800/50">
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-sm">
+                    <div className="flex items-center">
+                      <BarChart className="mr-2 h-4 w-4 text-pink-500" />
+                      ML Tooling & Stack
+                    </div>
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-xs text-zinc-400">
+                    <strong>Languages:</strong> Python-based modeling
+                  </p>
+                  <p className="mt-2 text-xs text-zinc-400">
+                    <strong>Azure ML Stack:</strong>
+                  </p>
+                  <ul className="mt-1 list-disc pl-4 text-xs text-zinc-400">
+                    <li>Azure ML Workspaces, Application Insights, Log Analytics</li>
+                    <li>Feature store, MLflow for tracking, model registry, scheduled pipelines</li>
+                  </ul>
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    <Badge variant="outline" className="bg-zinc-700 text-xs">
+                      Python
+                    </Badge>
+                    <Badge variant="outline" className="bg-zinc-700 text-xs">
+                      Azure ML
+                    </Badge>
+                    <Badge variant="outline" className="bg-zinc-700 text-xs">
+                      MLflow
+                    </Badge>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card className="border-zinc-800 bg-zinc-800/50">
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-sm">
+                    <div className="flex items-center">
+                      <FileText className="mr-2 h-4 w-4 text-pink-500" />
+                      Capabilities & Solutions
+                    </div>
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-xs text-zinc-400">
+                    <strong>Core Capabilities:</strong>
+                  </p>
+                  <ul className="mt-1 list-disc pl-4 text-xs text-zinc-400">
+                    <li>Time-series forecasting (milk and crop delivery predictions)</li>
+                    <li>Recommender engines (marketing + credit improvement)</li>
+                    <li>Risk analytics (SMAPE, ROI simulation)</li>
+                    <li>Portfolio ROI simulators and credit limit estimators</li>
+                  </ul>
+                  <p className="mt-2 text-xs text-zinc-400">
+                    <strong>Custom Solutions:</strong>
+                  </p>
+                  <ul className="mt-1 list-disc pl-4 text-xs text-zinc-400">
+                    <li>Data Cleaning App (deduplication of farmer profiles)</li>
+                    <li>Credit Score Update API</li>
+                    <li>Data Audit System (pre-checks on MIS sync vs. AI models)</li>
+                  </ul>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Databases & Persistence */}
       <Card className="border-zinc-800 bg-zinc-900">
         <CardHeader className="cursor-pointer" onClick={() => toggleSection("database")}>
           <CardTitle className="flex items-center justify-between">
             <div className="flex items-center">
               <Database className="mr-2 h-5 w-5 text-yellow-500" />
-              Database
+              Databases & Persistence
             </div>
             {expandedSections.database ? (
               <ChevronUp className="h-5 w-5 text-zinc-400" />
@@ -590,7 +554,7 @@ export default function TechnologiesPage() {
               <ChevronDown className="h-5 w-5 text-zinc-400" />
             )}
           </CardTitle>
-          <CardDescription>Aurora DB, RDS, Backups and Archiving</CardDescription>
+          <CardDescription>Storage Solutions and Data Synchronization</CardDescription>
         </CardHeader>
         <CardContent
           className={cn(
@@ -599,73 +563,67 @@ export default function TechnologiesPage() {
           )}
         >
           <div className="overflow-hidden">
-            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-              <Card className="border-zinc-800 bg-zinc-800/50">
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-sm">
-                    <div className="flex items-center">
-                      <HardDrive className="mr-2 h-4 w-4 text-yellow-500" />
-                      Aurora DB & RDS
-                    </div>
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-xs text-zinc-400">
-                    RDS is used for lower-cost database management, while the company is transitioning to Aurora for
-                    higher performance and scalability.
-                  </p>
-                  <p className="mt-2 text-xs text-zinc-400">
-                    Transactional data is stored on a duplicate PostgreSQL database, which tracks and stores carbon
-                    credit transactions.
-                  </p>
-                  <div className="mt-4">
-                    <div className="mb-1 flex items-center justify-between">
-                      <div className="text-xs text-zinc-400">Database Migration</div>
-                      <div className="text-xs text-zinc-400">In Progress</div>
-                    </div>
-                    <Progress value={60} className="h-1.5" />
+            <Card className="border-zinc-800 bg-zinc-800/50">
+              <CardHeader className="pb-2">
+                <CardTitle className="text-sm">
+                  <div className="flex items-center">
+                    <HardDrive className="mr-2 h-4 w-4 text-yellow-500" />
+                    Database Solutions
                   </div>
-                  <div className="mt-4 flex items-center gap-2">
-                    <AlertTriangle className="h-4 w-4 text-yellow-500" />
-                    <p className="text-xs text-yellow-500">
-                      Data synchronization between duplicate databases is a risk
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                  <div>
+                    <p className="text-xs text-zinc-400">
+                      <strong>Primary:</strong> PostgreSQL (cloud)
                     </p>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card className="border-zinc-800 bg-zinc-800/50">
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-sm">
-                    <div className="flex items-center">
-                      <Archive className="mr-2 h-4 w-4 text-yellow-500" />
-                      Backups and Archiving
+                    <p className="mt-2 text-xs text-zinc-400">
+                      <strong>Desktop MIS:</strong> SQLite (for local, offline use)
+                    </p>
+                    <p className="mt-2 text-xs text-zinc-400">
+                      <strong>File Storage:</strong> AWS S3
+                    </p>
+                    <div className="mt-4 flex flex-wrap gap-2">
+                      <Badge variant="outline" className="bg-zinc-700 text-xs">
+                        PostgreSQL
+                      </Badge>
+                      <Badge variant="outline" className="bg-zinc-700 text-xs">
+                        SQLite
+                      </Badge>
+                      <Badge variant="outline" className="bg-zinc-700 text-xs">
+                        AWS S3
+                      </Badge>
                     </div>
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-xs text-zinc-400">
-                    RDS backups are configured, with only live records being retained for a year. The rest is archived,
-                    ensuring historical data is preserved while keeping operational data at manageable costs.
-                  </p>
-                  <div className="mt-4 flex items-center gap-2">
-                    <AlertTriangle className="h-4 w-4 text-yellow-500" />
-                    <p className="text-xs text-yellow-500">Archiving may be manual, better data governance needed</p>
                   </div>
-                </CardContent>
-              </Card>
-            </div>
+                  <div>
+                    <p className="text-xs text-zinc-400">
+                      <strong>Data Sync:</strong> All farmer data from CoopMIS syncs through Sync Service to be
+                      available across APIs and ML pipelines.
+                    </p>
+                    <div className="mt-4 flex items-center gap-2">
+                      <CheckCircle className="h-4 w-4 text-green-500" />
+                      <p className="text-xs text-green-500">Centralized data synchronization</p>
+                    </div>
+                    <div className="mt-2 flex items-center gap-2">
+                      <AlertTriangle className="h-4 w-4 text-yellow-500" />
+                      <p className="text-xs text-yellow-500">Data quality challenges require manual audits</p>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </CardContent>
       </Card>
 
-      {/* Integration with Ecobank */}
+      {/* Integrations */}
       <Card className="border-zinc-800 bg-zinc-900">
         <CardHeader className="cursor-pointer" onClick={() => toggleSection("integration")}>
           <CardTitle className="flex items-center justify-between">
             <div className="flex items-center">
               <Link className="mr-2 h-5 w-5 text-green-400" />
-              Integration with Ecobank
+              Integrations
             </div>
             {expandedSections.integration ? (
               <ChevronUp className="h-5 w-5 text-zinc-400" />
@@ -673,7 +631,7 @@ export default function TechnologiesPage() {
               <ChevronDown className="h-5 w-5 text-zinc-400" />
             )}
           </CardTitle>
-          <CardDescription>Banking partnership and integration status</CardDescription>
+          <CardDescription>External Services and Authentication</CardDescription>
         </CardHeader>
         <CardContent
           className={cn(
@@ -682,33 +640,64 @@ export default function TechnologiesPage() {
           )}
         >
           <div className="overflow-hidden">
-            <Card className="border-zinc-800 bg-zinc-800/50">
-              <CardHeader className="pb-2">
-                <CardTitle className="text-sm">
-                  <div className="flex items-center">
-                    <Building className="mr-2 h-4 w-4 text-green-400" />
-                    Ecobank Integration
-                  </div>
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-xs text-zinc-400">
-                  The MOU with Ecobank allows Melanin Kapital to access Ecobank's infrastructure and API for better
-                  banking integration. However, this integration is not yet automated.
-                </p>
-                <div className="mt-4">
-                  <div className="mb-1 flex items-center justify-between">
-                    <div className="text-xs text-zinc-400">Integration Status</div>
-                    <div className="text-xs text-zinc-400">Manual Process</div>
-                  </div>
-                  <Progress value={30} className="h-1.5" />
-                </div>
-                <div className="mt-4 flex items-center gap-2">
-                  <AlertTriangle className="h-4 w-4 text-yellow-500" />
-                  <p className="text-xs text-yellow-500">Manual integration creates operational bottlenecks</p>
-                </div>
-              </CardContent>
-            </Card>
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+              <Card className="border-zinc-800 bg-zinc-800/50">
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-sm">
+                    <div className="flex items-center">
+                      <Building className="mr-2 h-4 w-4 text-green-400" />
+                      Mobile Money & Disbursement
+                    </div>
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <ul className="list-disc pl-4 text-xs text-zinc-400">
+                    <li>MTN MoMo</li>
+                    <li>Airtel Money</li>
+                    <li>Yo! Payments</li>
+                  </ul>
+                </CardContent>
+              </Card>
+
+              <Card className="border-zinc-800 bg-zinc-800/50">
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-sm">
+                    <div className="flex items-center">
+                      <MessageSquare className="mr-2 h-4 w-4 text-green-400" />
+                      Messaging
+                    </div>
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-xs text-zinc-400">
+                    <strong>SMS:</strong> Africa's Talking
+                  </p>
+                  <p className="mt-2 text-xs text-zinc-400">
+                    <strong>Email:</strong> SendGrid
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card className="border-zinc-800 bg-zinc-800/50">
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-sm">
+                    <div className="flex items-center">
+                      <Key className="mr-2 h-4 w-4 text-green-400" />
+                      Authentication
+                    </div>
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-xs text-zinc-400">
+                    <strong>Keycloak:</strong> SSO, RBAC, session control
+                  </p>
+                  <p className="mt-2 text-xs text-zinc-400">
+                    All integrations operate through secured APIs; internal services communicate through REST endpoints
+                    across private VPCs.
+                  </p>
+                </CardContent>
+              </Card>
+            </div>
           </div>
         </CardContent>
       </Card>
@@ -728,22 +717,36 @@ export default function TechnologiesPage() {
               <li className="flex gap-2">
                 <ArrowRight className="h-5 w-5 flex-shrink-0 text-green-500" />
                 <span className="text-sm text-zinc-400">
-                  <strong className="text-white">AWS Managed Services:</strong> Fargate, Aurora DB, and S3 offer strong
-                  scalability potential and cost savings in the long term.
+                  <strong className="text-white">Full-stack platform maturity:</strong> Emata owns the entire flow from
+                  data ingestion, decisioning (AI), to disbursement and repayment.
                 </span>
               </li>
               <li className="flex gap-2">
                 <ArrowRight className="h-5 w-5 flex-shrink-0 text-green-500" />
                 <span className="text-sm text-zinc-400">
-                  <strong className="text-white">Blockchain Technology:</strong> Provides a transparent and secure
-                  method for managing carbon credits through tokenization.
+                  <strong className="text-white">Offline-first design:</strong> CoopMIS (via .NET MAUI and SQLite)
+                  enables reach into connectivity-limited areas.
                 </span>
               </li>
               <li className="flex gap-2">
                 <ArrowRight className="h-5 w-5 flex-shrink-0 text-green-500" />
                 <span className="text-sm text-zinc-400">
-                  <strong className="text-white">Containerization:</strong> Containerization and auto-scaling provide
-                  flexibility and scalability to meet future demand.
+                  <strong className="text-white">Azure ML Maturity:</strong> Well-structured pipelines, model
+                  versioning, and ROI simulation help drive consistent ML performance.
+                </span>
+              </li>
+              <li className="flex gap-2">
+                <ArrowRight className="h-5 w-5 flex-shrink-0 text-green-500" />
+                <span className="text-sm text-zinc-400">
+                  <strong className="text-white">API-centric Modular Architecture:</strong> Enables scaling, onboarding
+                  of new partners and crops without extensive code rework.
+                </span>
+              </li>
+              <li className="flex gap-2">
+                <ArrowRight className="h-5 w-5 flex-shrink-0 text-green-500" />
+                <span className="text-sm text-zinc-400">
+                  <strong className="text-white">Security & Infrastructure:</strong> VPN, VPC segmentation, and
+                  centralized Keycloak setup mitigate unauthorized access.
                 </span>
               </li>
             </ul>
@@ -763,29 +766,37 @@ export default function TechnologiesPage() {
               <li className="flex gap-2">
                 <ArrowRight className="h-5 w-5 flex-shrink-0 text-yellow-500" />
                 <span className="text-sm text-zinc-400">
-                  <strong className="text-white">Manual Processes:</strong> Manual token minting and burning processes
-                  hinder scalability, and the lack of full decentralization may limit trust in the system.
+                  <strong className="text-white">Data Quality & Syncing:</strong> MIS data can be outdated or misaligned
+                  with AI model requirements. Requires frequent data audits and manual cleaning.
                 </span>
               </li>
               <li className="flex gap-2">
                 <ArrowRight className="h-5 w-5 flex-shrink-0 text-yellow-500" />
                 <span className="text-sm text-zinc-400">
-                  <strong className="text-white">Limited Fault Tolerance:</strong> Single-AZ deployment and reliance on
-                  manual deployments result in limited fault tolerance and operational inefficiency.
+                  <strong className="text-white">Technical Debt from Ported Systems:</strong> Several components were
+                  inherited or adapted from Laboremus-era stacks. Modernization (e.g., GraphQL, event streaming) may
+                  become necessary.
                 </span>
               </li>
               <li className="flex gap-2">
                 <ArrowRight className="h-5 w-5 flex-shrink-0 text-yellow-500" />
                 <span className="text-sm text-zinc-400">
-                  <strong className="text-white">Integration Limitations:</strong> Limited integrations with key
-                  partners like Ecobank and manual processes further complicate scaling.
+                  <strong className="text-white">Limited Observability on Production ML:</strong> Lack of real-time
+                  monitoring for model drift or scoring anomalies could impact lending precision.
                 </span>
               </li>
               <li className="flex gap-2">
                 <ArrowRight className="h-5 w-5 flex-shrink-0 text-yellow-500" />
                 <span className="text-sm text-zinc-400">
-                  <strong className="text-white">Cost Management:</strong> Cost management risks, particularly related
-                  to AWS services, need proactive measures to avoid unexpected expenses.
+                  <strong className="text-white">Human-Dependent Credit Limit Reviews:</strong> Though modeling is
+                  robust, manual reviews are still required, delaying scale.
+                </span>
+              </li>
+              <li className="flex gap-2">
+                <ArrowRight className="h-5 w-5 flex-shrink-0 text-yellow-500" />
+                <span className="text-sm text-zinc-400">
+                  <strong className="text-white">Distributed Infrastructure Overhead:</strong> Azure + AWS split
+                  increases cognitive and operational load for DevOps/ML Ops teams.
                 </span>
               </li>
             </ul>
@@ -800,11 +811,12 @@ export default function TechnologiesPage() {
         </CardHeader>
         <CardContent>
           <p className="text-sm text-zinc-400">
-            Melanin Kapital's tech stack combines strong potential for scalability through containerization and managed
-            services but is currently hindered by manual processes, limited automation, and lack of multi-region
-            deployment. As the company grows, addressing these challenges, particularly around automation, security,
-            cost optimization, and integration maturity, will be crucial to supporting the financial projections and
-            ensuring sustainability in operations.
+            Emata's technology stack demonstrates a mature, full-stack platform with strong capabilities in offline
+            operations, AI/ML modeling, and modular architecture. The combination of AWS and Azure infrastructure
+            provides robust compute and specialized ML capabilities, while the microservices approach enables
+            flexibility across different agricultural contexts. Key challenges around data quality, technical debt, and
+            distributed infrastructure will need to be addressed as the company scales across new geographies and crop
+            types.
           </p>
         </CardContent>
       </Card>

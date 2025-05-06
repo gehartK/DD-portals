@@ -2,19 +2,7 @@
 import { useState } from "react"
 import type React from "react"
 
-import {
-  ChevronRight,
-  GitFork,
-  Network,
-  Users,
-  Building,
-  CreditCard,
-  Leaf,
-  LineChart,
-  Scale,
-  Server,
-  Award,
-} from "lucide-react"
+import { ChevronRight, GitFork, Network, Users, Building, CreditCard, Scale, Server, Shield } from "lucide-react"
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -128,94 +116,82 @@ export default function ValueChainPage() {
   // Stakeholders data for the value network
   const stakeholders: Stakeholder[] = [
     {
-      id: "melanin-kapital",
-      name: "Melanin Kapital",
-      role: "Provides green finance products (e.g., carbon-backed loans), focuses on financial inclusion, and integrates blockchain and cloud-based solutions.",
+      id: "emata",
+      name: "Emata",
+      role: "Provides affordable digital loans to farmers, credit scoring technology, and loan origination platforms to agricultural partners.",
       valueExchange:
-        "Creates financial products and services that target underserved markets, especially SMEs and women-owned businesses.",
+        "Delivers mobile-based credit products with clear repayment terms and receives loan repayments and behavioral data that feeds credit algorithms.",
       icon: <Building className="h-6 w-6" />,
       color: "bg-primary",
       position: { x: 50, y: 50 },
     },
     {
-      id: "ecobank",
-      name: "Ecobank",
-      role: "Facilitates lending and disbursement of loans to end customers. Provides the infrastructure for transactional operations in multiple countries.",
+      id: "farmers",
+      name: "Farmers",
+      role: "End users of Emata's financial products who receive loans and repay through harvest proceeds.",
       valueExchange:
-        "Melanin Kapital benefits from Ecobank's pan-African presence, financial services infrastructure, and ability to process loans efficiently across the continent.",
-      icon: <Building className="h-6 w-6" />,
-      color: "bg-blue-500",
-      position: { x: 25, y: 25 },
-    },
-    {
-      id: "visa",
-      name: "Visa",
-      role: "Enables payment processing and provides digital financial infrastructure for the company's products.",
-      valueExchange:
-        "Visa helps Melanin Kapital reach customers in the payment ecosystem, providing access to card payments and digital transactions.",
-      icon: <CreditCard className="h-6 w-6" />,
-      color: "bg-blue-700",
-      position: { x: 75, y: 25 },
-    },
-    {
-      id: "customers",
-      name: "Customers",
-      role: "The end-users of Melanin Kapital's financial products and green finance services.",
-      valueExchange:
-        "Customers gain access to financial products that promote sustainability, economic growth, and financial inclusion.",
+        "Receive affordable credit and provide repayment through harvest proceeds and behavioral data that improves credit algorithms.",
       icon: <Users className="h-6 w-6" />,
       color: "bg-green-500",
       position: { x: 85, y: 50 },
     },
     {
-      id: "carbon-credit-providers",
-      name: "Carbon Credit Providers",
-      role: "Supply carbon credits to be integrated into Melanin Kapital's offerings, supporting the company's green finance solutions.",
+      id: "agri-partners",
+      name: "Agri Partners",
+      role: "Cooperatives, processors and buyers (e.g., UGACOF, Ndugu, Omia) that facilitate loan distribution and repayment collection.",
       valueExchange:
-        "Melanin Kapital creates green-backed financial products that help mitigate climate change while providing a market for carbon credits.",
-      icon: <Leaf className="h-6 w-6" />,
-      color: "bg-green-700",
-      position: { x: 75, y: 75 },
+        "Provide access to farmer data, transaction execution, and often partial or full loan guarantees. Receive loan origination platforms and increased farmer loyalty.",
+      icon: <Building className="h-6 w-6" />,
+      color: "bg-blue-500",
+      position: { x: 25, y: 25 },
     },
     {
-      id: "investors",
-      name: "Investors",
-      role: "Provide capital to fund the company's operations and expansion.",
+      id: "agents",
+      name: "Agents",
+      role: "Field staff within agri partner organizations who handle farmer onboarding and loan request initiation.",
       valueExchange:
-        "Investors gain financial returns and contribute to impact investing, supporting sustainable finance and green economy growth.",
-      icon: <LineChart className="h-6 w-6" />,
+        "Provide farmer onboarding, data capture, and loan request initiation. Receive training, certification, and incentives for high recovery rates.",
+      icon: <Users className="h-6 w-6" />,
+      color: "bg-amber-600",
+      position: { x: 75, y: 25 },
+    },
+    {
+      id: "capital-providers",
+      name: "Capital Providers",
+      role: "Organizations (UGACOF, 3rd-party banks, donors) that provide liquidity for lending.",
+      valueExchange:
+        "Provide liquidity for lending, either through Emata's balance sheet or via enterprise/off-balance lending models.",
+      icon: <CreditCard className="h-6 w-6" />,
       color: "bg-purple-600",
       position: { x: 15, y: 50 },
     },
     {
-      id: "regulatory-bodies",
-      name: "Regulatory Bodies",
-      role: "Ensure Melanin Kapital adheres to financial regulations, legal requirements, and compliance standards in each country it operates.",
-      valueExchange:
-        "Regulatory bodies ensure trust in the financial market, promoting fair practices and legal operations across regions.",
-      icon: <Scale className="h-6 w-6" />,
-      color: "bg-red-600",
-      position: { x: 25, y: 75 },
-    },
-    {
-      id: "technology-partners",
-      name: "Technology Partners",
-      role: "Provide infrastructure (e.g., AWS, blockchain systems) for Melanin Kapital's platform to run efficiently and securely.",
-      valueExchange:
-        "Technology partners provide scalable infrastructure, ensuring reliable and secure operations, especially as Melanin Kapital scales.",
+      id: "technology-platform",
+      name: "Technology Platform",
+      role: "Emata's digital infrastructure including MIS, CropMIS, and credit scoring algorithms.",
+      valueExchange: "Enables loan origination, credit scoring, and repayment processing across the entire ecosystem.",
       icon: <Server className="h-6 w-6" />,
       color: "bg-zinc-600",
       position: { x: 50, y: 15 },
     },
     {
-      id: "fellowships",
-      name: "Fellowships and Programs",
-      role: "Provide resources, training, and financial support to Melanin Kapital during its early stages.",
+      id: "regulatory-bodies",
+      name: "Regulatory Bodies",
+      role: "Government entities that oversee financial services and agricultural sectors.",
       valueExchange:
-        "These programs offer financial backing, mentorship, and exposure to help Melanin Kapital develop its business model, improve its operations, and gain credibility in the market.",
-      icon: <Award className="h-6 w-6" />,
-      color: "bg-amber-600",
-      position: { x: 50, y: 85 },
+        "Provide legal framework and oversight for lending operations, ensuring consumer protection and market stability.",
+      icon: <Scale className="h-6 w-6" />,
+      color: "bg-red-600",
+      position: { x: 25, y: 75 },
+    },
+    {
+      id: "insurance-providers",
+      name: "Insurance Providers",
+      role: "Organizations offering crop insurance products that complement Emata's loans.",
+      valueExchange: "Provide risk mitigation for farmers and Emata through crop insurance products.",
+      icon: <Shield className="h-6 w-6" />,
+      color: "bg-blue-700",
+      position: { x: 75, y: 75 },
     },
   ]
 
@@ -240,13 +216,13 @@ export default function ValueChainPage() {
     <div className="space-y-6">
       <div>
         <h1 className="text-2xl font-bold tracking-tight">Value Chain Analysis</h1>
-        <p className="text-muted-foreground">Analyzing how Melanin Kapital creates, delivers, and captures value</p>
+        <p className="text-muted-foreground">Analyzing how Emata creates, delivers, and captures value</p>
       </div>
 
       <Tabs defaultValue="network" className="space-y-4">
         <TabsList>
           <TabsTrigger value="network">Value Network Analysis</TabsTrigger>
-          <TabsTrigger value="nonlinear">Non-Linear Value Chain</TabsTrigger>
+          <TabsTrigger value="decomposition">Value Chain Decomposition</TabsTrigger>
         </TabsList>
 
         <TabsContent value="network" className="space-y-6">
@@ -258,14 +234,14 @@ export default function ValueChainPage() {
                 Value Network Analysis
               </CardTitle>
               <CardDescription>
-                Understanding the interactions between stakeholders in Melanin Kapital's ecosystem
+                Understanding the interactions between stakeholders in Emata's ecosystem
               </CardDescription>
             </CardHeader>
             <CardContent>
               <p className="mb-4 text-sm text-zinc-400">
                 A Value Network Analysis examines the interactions between stakeholders and value exchanges in the
                 business ecosystem. Hover over or click on any stakeholder to explore their role and relationship with
-                Melanin Kapital.
+                Emata.
               </p>
 
               {/* Enhanced Interactive Network Visualization */}
@@ -342,30 +318,31 @@ export default function ValueChainPage() {
             <CardContent>
               <div className="grid grid-cols-2 gap-3">
                 <div className="rounded-lg border border-zinc-800 bg-zinc-900 p-3">
-                  <h3 className="mb-1 text-sm font-medium">Strong Strategic Partnerships</h3>
+                  <h3 className="mb-1 text-sm font-medium">Deep Ecosystem Integration</h3>
                   <p className="text-xs text-zinc-400">
-                    Access to extensive financial infrastructure through Ecobank and Visa, enabling rapid scaling and
-                    integration of green finance products.
+                    Emata embeds directly into value chains via cooperatives, processors, and buyers, ensuring natural
+                    repayment mechanisms and access to diversified data streams across multiple crops.
                   </p>
                 </div>
                 <div className="rounded-lg border border-zinc-800 bg-zinc-900 p-3">
-                  <h3 className="mb-1 text-sm font-medium">Impact-Focused Network</h3>
+                  <h3 className="mb-1 text-sm font-medium">Shared Incentives & Risk Mitigation</h3>
                   <p className="text-xs text-zinc-400">
-                    Network built around shared values of financial inclusion and sustainability, positioning Melanin
-                    Kapital as a socially responsible institution.
+                    Many partners provide partial or full guarantees on loans, reducing Emata's capital risk while
+                    benefiting from increased farmer loyalty and productivity.
                   </p>
                 </div>
                 <div className="rounded-lg border border-zinc-800 bg-zinc-900 p-3">
-                  <h3 className="mb-1 text-sm font-medium">Technology & Scalability</h3>
+                  <h3 className="mb-1 text-sm font-medium">Data-Driven Decisioning</h3>
                   <p className="text-xs text-zinc-400">
-                    Blockchain and cloud infrastructure enable transparent, secure, and scalable financial products
-                    across markets.
+                    Emata uses historical delivery data, farmer profiles, and seasonal trends to generate granular,
+                    farmer-specific credit limits that improve over time.
                   </p>
                 </div>
                 <div className="rounded-lg border border-zinc-800 bg-zinc-900 p-3">
-                  <h3 className="mb-1 text-sm font-medium">Access to Capital & Support</h3>
+                  <h3 className="mb-1 text-sm font-medium">Scalable Tech Architecture</h3>
                   <p className="text-xs text-zinc-400">
-                    Investors and fellowship programs provide funding, mentorship, and business development resources.
+                    Full-stack digital loan platform (CropMIS, CoopMIS) freely provided to partners, enhancing lock-in
+                    and enabling rapid replication across regions and value chains.
                   </p>
                 </div>
               </div>
@@ -382,37 +359,38 @@ export default function ValueChainPage() {
               <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
                 {[
                   {
-                    from: "Melanin Kapital",
-                    to: "Ecobank",
+                    from: "Emata",
+                    to: "Farmers",
                     exchange:
-                      "Access to banking infrastructure for loan distribution and transaction processing across regions.",
+                      "Affordable, mobile-based credit products with clear repayment terms, delivered via feature phone or through agents.",
                   },
                   {
-                    from: "Melanin Kapital",
-                    to: "Visa",
-                    exchange: "Digital payment solutions enhancing accessibility and usability of financial products.",
-                  },
-                  {
-                    from: "Melanin Kapital",
-                    to: "Carbon Credit Providers",
+                    from: "Farmers",
+                    to: "Emata",
                     exchange:
-                      "Integration of carbon credits into financial products, creating market for sustainable practices.",
+                      "Repayment through harvest proceeds and behavioral data (repayment patterns, delivery performance).",
                   },
                   {
-                    from: "Melanin Kapital",
-                    to: "Customers",
+                    from: "Emata",
+                    to: "Agri Partners",
                     exchange:
-                      "Affordable loans, financial inclusion, and green finance products for SMEs and women-owned businesses.",
+                      "Loan origination platform (MIS, CropMIS), agent training, credit scoring, and repayment processing.",
                   },
                   {
-                    from: "Melanin Kapital",
-                    to: "Investors",
-                    exchange: "Financial returns and social impact through green finance initiatives.",
+                    from: "Agri Partners",
+                    to: "Emata",
+                    exchange: "Access to farmer data, transaction execution, and partial or full loan guarantees.",
                   },
                   {
-                    from: "Melanin Kapital",
-                    to: "Regulatory Bodies",
-                    exchange: "Legal compliance building trust in financial products across regions.",
+                    from: "Agri Partners",
+                    to: "Farmers",
+                    exchange:
+                      "Channel for loan access, inputs (in-kind loans), guaranteed markets, and price transparency.",
+                  },
+                  {
+                    from: "Farmers",
+                    to: "Agri Partners",
+                    exchange: "Crop delivery tied to loan repayment via agreed deductions.",
                   },
                 ].map((exchange, i) => (
                   <div key={i} className="flex items-start space-x-2 rounded-md border border-zinc-800 bg-zinc-900 p-2">
@@ -443,229 +421,148 @@ export default function ValueChainPage() {
             <CardContent>
               <div className="grid grid-cols-2 gap-3">
                 <div className="rounded-lg border border-zinc-800 bg-zinc-900 p-3">
-                  <h3 className="mb-1 text-sm font-medium">External Partner Dependency</h3>
+                  <h3 className="mb-1 text-sm font-medium">Over-Reliance on Agri Partners</h3>
                   <p className="text-xs text-zinc-400">
-                    Reliance on Ecobank and Visa creates vendor dependency risk that could disrupt service delivery.
+                    Repayment assurance depends heavily on partners fulfilling delivery purchases and payment
+                    deductions. Partner operational or liquidity issues expose Emata to repayment lapses.
                   </p>
                 </div>
                 <div className="rounded-lg border border-zinc-800 bg-zinc-900 p-3">
-                  <h3 className="mb-1 text-sm font-medium">Regulatory Complexity</h3>
+                  <h3 className="mb-1 text-sm font-medium">Operational Quality Risk</h3>
                   <p className="text-xs text-zinc-400">
-                    Expansion into new regions brings increased regulatory challenges and compliance requirements.
+                    Agents are often field staff of agri partners. Misaligned incentives, high turnover, or
+                    underperformance can impair loan onboarding quality and recovery outcomes.
                   </p>
                 </div>
                 <div className="rounded-lg border border-zinc-800 bg-zinc-900 p-3">
-                  <h3 className="mb-1 text-sm font-medium">Funding Sustainability</h3>
+                  <h3 className="mb-1 text-sm font-medium">Data Integrity Issues</h3>
                   <p className="text-xs text-zinc-400">
-                    Dependence on fellowships and grants may not be sustainable as the company matures.
+                    Credit scoring accuracy depends on fresh delivery data. If cooperatives don't digitize regularly,
+                    credit limits may be outdated or invalid, increasing lending risk.
                   </p>
                 </div>
                 <div className="rounded-lg border border-zinc-800 bg-zinc-900 p-3">
-                  <h3 className="mb-1 text-sm font-medium">Technology Risks</h3>
+                  <h3 className="mb-1 text-sm font-medium">Fragmented Guarantee Models</h3>
                   <p className="text-xs text-zinc-400">
-                    Blockchain and cloud technologies require ongoing maintenance and face potential scaling issues.
+                    Guarantee structures vary by partner (25–100%). Some pilots operate without formalized risk
+                    transfer, exposing Emata to default losses depending on partner enforcement.
                   </p>
                 </div>
                 <div className="rounded-lg border border-zinc-800 bg-zinc-900 p-3 col-span-2">
-                  <h3 className="mb-1 text-sm font-medium">Customer Acquisition Limitations</h3>
+                  <h3 className="mb-1 text-sm font-medium">Limited Enforcement Capacity</h3>
                   <p className="text-xs text-zinc-400">
-                    Reliance on strategic partnerships for customer acquisition limits independent growth potential.
+                    Legal recourse in rural contexts is slow and costly. Recovery after default often becomes
+                    impractical, making prevention through partner relationships critical.
                   </p>
                 </div>
               </div>
             </CardContent>
           </Card>
+
+          <Card className="mt-6">
+            <CardHeader>
+              <CardTitle>Risk Transfer & Value Leverage Points</CardTitle>
+              <CardDescription>Key mechanisms that strengthen or expose Emata's value network</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead>
+                    <tr className="border-b border-zinc-800">
+                      <th className="pb-2 text-left text-sm font-medium">Flow</th>
+                      <th className="pb-2 text-left text-sm font-medium">Strength</th>
+                      <th className="pb-2 text-left text-sm font-medium">Vulnerability</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-zinc-800">
+                    <tr>
+                      <td className="py-3 pr-4 text-sm">Repayment via Harvest Proceeds</td>
+                      <td className="py-3 pr-4 text-sm text-zinc-400">Automates repayment, builds partner loyalty</td>
+                      <td className="py-3 text-sm text-zinc-400">
+                        Delayed payments or side-selling by farmers undermine repayment
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="py-3 pr-4 text-sm">Loan Guarantees</td>
+                      <td className="py-3 pr-4 text-sm text-zinc-400">Shifts risk to agri partner</td>
+                      <td className="py-3 text-sm text-zinc-400">
+                        Inconsistent enforcement, especially in non-commercial MOUs
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="py-3 pr-4 text-sm">Agent Incentives</td>
+                      <td className="py-3 pr-4 text-sm text-zinc-400">
+                        Enhances repayment rates (e.g., 0.25% bonus for 95% recovery)
+                      </td>
+                      <td className="py-3 text-sm text-zinc-400">
+                        May be insufficient to ensure quality or prevent fraud
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="py-3 pr-4 text-sm">MIS Adoption</td>
+                      <td className="py-3 pr-4 text-sm text-zinc-400">Drives data transparency & credit decisioning</td>
+                      <td className="py-3 text-sm text-zinc-400">
+                        Requires infrastructure and training; vulnerable to inconsistent updates
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="py-3 pr-4 text-sm">Capital Flow Models</td>
+                      <td className="py-3 pr-4 text-sm text-zinc-400">
+                        De-risks expansion through enterprise financing
+                      </td>
+                      <td className="py-3 text-sm text-zinc-400">
+                        Enterprise financing still under development (UGACOF pilot in 2024)
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </CardContent>
+          </Card>
         </TabsContent>
 
-        <TabsContent value="nonlinear" className="space-y-6">
+        <TabsContent value="decomposition" className="space-y-6">
           {/* Platform Model Overview */}
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center">
                 <Network className="mr-2 h-5 w-5 text-primary" />
-                Platform Model Overview
+                Model Overview - How Value Is Created
               </CardTitle>
-              <CardDescription>A non-linear approach to value creation through a platform ecosystem</CardDescription>
+              <CardDescription>How Emata creates value through digital agricultural finance</CardDescription>
             </CardHeader>
             <CardContent>
               <p className="mb-4 text-sm text-zinc-400">
-                Unlike traditional linear value chains, Melanin Kapital operates as a platform that connects capital
-                suppliers (corporates and institutions) with capital seekers (SMEs). This platform model creates value
-                through facilitating transactions, reducing friction, and enabling financial inclusion that wouldn't be
-                possible in traditional models.
+                Emata creates value by digitally enabling access to credit for smallholder farmers, who are
+                traditionally underserved by banks due to high transaction costs, lack of credit history, and rural
+                remoteness. Emata embeds its lending platform within agricultural ecosystems — specifically via
+                cooperatives, agri-processors, and buyer organizations — to ensure repayment is automated and traceable
+                through crop deliveries.
               </p>
 
-              {/* Platform Visualization */}
-              <div className="relative mx-auto mb-6 h-[400px] w-full overflow-hidden rounded-lg bg-gradient-to-br from-zinc-900 to-zinc-800 p-4">
-                <div className="absolute inset-0 opacity-10">
-                  <div className="absolute left-0 top-0 h-40 w-40 rounded-full bg-primary/20 blur-3xl"></div>
-                  <div className="absolute bottom-0 right-0 h-60 w-60 rounded-full bg-blue-500/10 blur-3xl"></div>
+              <div className="mt-6 space-y-4">
+                <h3 className="text-sm font-medium">The core value creation is driven by:</h3>
+                <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
+                  <div className="rounded-lg border border-zinc-800 bg-zinc-900 p-3">
+                    <p className="text-xs text-zinc-400">
+                      Credit scoring algorithms using delivery and yield data from partners.
+                    </p>
+                  </div>
+                  <div className="rounded-lg border border-zinc-800 bg-zinc-900 p-3">
+                    <p className="text-xs text-zinc-400">
+                      Digital infrastructure (MIS, CropMIS) enabling cooperatives to manage data and interactions
+                      efficiently.
+                    </p>
+                  </div>
+                  <div className="rounded-lg border border-zinc-800 bg-zinc-900 p-3">
+                    <p className="text-xs text-zinc-400">
+                      Data aggregation from decentralized rural farmers to power underwriting decisions.
+                    </p>
+                  </div>
                 </div>
-
-                <svg width="100%" height="100%" viewBox="0 0 800 350" className="mx-auto">
-                  {/* Background Elements */}
-                  <rect x="0" y="0" width="800" height="350" fill="transparent" />
-
-                  {/* Platform Core - Melanin Kapital */}
-                  <circle cx="400" cy="175" r="70" fill="rgba(0, 230, 118, 0.2)" stroke="#00E676" strokeWidth="2" />
-                  <text x="400" y="165" textAnchor="middle" fill="#FFFFFF" fontSize="16" fontWeight="bold">
-                    Melanin Kapital
-                  </text>
-                  <text x="400" y="185" textAnchor="middle" fill="#CCCCCC" fontSize="12">
-                    Platform Core
-                  </text>
-
-                  {/* Supply Side - Capital Providers */}
-                  <circle cx="200" cy="100" r="50" fill="rgba(59, 130, 246, 0.2)" stroke="#3B82F6" strokeWidth="2" />
-                  <text x="200" y="95" textAnchor="middle" fill="#FFFFFF" fontSize="14" fontWeight="bold">
-                    Capital Providers
-                  </text>
-                  <text x="200" y="115" textAnchor="middle" fill="#CCCCCC" fontSize="10">
-                    Corporates & Institutions
-                  </text>
-
-                  {/* Demand Side - SMEs */}
-                  <circle cx="600" cy="100" r="50" fill="rgba(139, 92, 246, 0.2)" stroke="#8B5CF6" strokeWidth="2" />
-                  <text x="600" y="95" textAnchor="middle" fill="#FFFFFF" fontSize="14" fontWeight="bold">
-                    SMEs
-                  </text>
-                  <text x="600" y="115" textAnchor="middle" fill="#CCCCCC" fontSize="10">
-                    Capital Seekers
-                  </text>
-
-                  {/* Banking Partners */}
-                  <circle cx="200" cy="250" r="50" fill="rgba(16, 185, 129, 0.2)" stroke="#10B981" strokeWidth="2" />
-                  <text x="200" y="245" textAnchor="middle" fill="#FFFFFF" fontSize="14" fontWeight="bold">
-                    Banking Partners
-                  </text>
-                  <text x="200" y="265" textAnchor="middle" fill="#CCCCCC" fontSize="10">
-                    Ecobank & Others
-                  </text>
-
-                  {/* Carbon Market */}
-                  <circle cx="600" cy="250" r="50" fill="rgba(245, 158, 11, 0.2)" stroke="#F59E0B" strokeWidth="2" />
-                  <text x="600" y="245" textAnchor="middle" fill="#FFFFFF" fontSize="14" fontWeight="bold">
-                    Carbon Market
-                  </text>
-                  <text x="600" y="265" textAnchor="middle" fill="#CCCCCC" fontSize="10">
-                    Credit Trading
-                  </text>
-
-                  {/* Flow Arrows */}
-                  {/* Capital Providers to Platform */}
-                  <path
-                    d="M240 130 L350 160"
-                    stroke="#3B82F6"
-                    strokeWidth="2"
-                    fill="none"
-                    markerEnd="url(#arrowhead-nonlinear)"
-                  />
-                  <text x="290" y="135" textAnchor="middle" fill="#CCCCCC" fontSize="10">
-                    Capital Supply
-                  </text>
-
-                  {/* Platform to SMEs */}
-                  <path
-                    d="M450 160 L560 130"
-                    stroke="#00E676"
-                    strokeWidth="2"
-                    fill="none"
-                    markerEnd="url(#arrowhead-nonlinear)"
-                  />
-                  <text x="510" y="135" textAnchor="middle" fill="#CCCCCC" fontSize="10">
-                    Lending
-                  </text>
-
-                  {/* SMEs to Platform */}
-                  <path
-                    d="M560 130 L450 160"
-                    stroke="#8B5CF6"
-                    strokeWidth="2"
-                    fill="none"
-                    markerEnd="url(#arrowhead-nonlinear)"
-                    strokeDasharray="5,5"
-                    opacity="0.7"
-                  />
-                  <text x="510" y="115" textAnchor="middle" fill="#CCCCCC" fontSize="10">
-                    Repayments
-                  </text>
-
-                  {/* Platform to Capital Providers */}
-                  <path
-                    d="M350 160 L240 130"
-                    stroke="#00E676"
-                    strokeWidth="2"
-                    fill="none"
-                    markerEnd="url(#arrowhead-nonlinear)"
-                    strokeDasharray="5,5"
-                    opacity="0.7"
-                  />
-                  <text x="290" y="115" textAnchor="middle" fill="#CCCCCC" fontSize="10">
-                    Returns
-                  </text>
-
-                  {/* Banking Partners to Platform */}
-                  <path
-                    d="M250 230 L350 190"
-                    stroke="#10B981"
-                    strokeWidth="2"
-                    fill="none"
-                    markerEnd="url(#arrowhead-nonlinear)"
-                  />
-                  <text x="290" y="220" textAnchor="middle" fill="#CCCCCC" fontSize="10">
-                    Financial Infrastructure
-                  </text>
-
-                  {/* Platform to Carbon Market */}
-                  <path
-                    d="M450 190 L550 230"
-                    stroke="#00E676"
-                    strokeWidth="2"
-                    fill="none"
-                    markerEnd="url(#arrowhead-nonlinear)"
-                  />
-                  <text x="510" y="220" textAnchor="middle" fill="#CCCCCC" fontSize="10">
-                    Carbon Credits
-                  </text>
-
-                  {/* Carbon Market to SMEs */}
-                  <path
-                    d="M580 220 L580 150"
-                    stroke="#F59E0B"
-                    strokeWidth="2"
-                    fill="none"
-                    markerEnd="url(#arrowhead-nonlinear)"
-                  />
-                  <text x="600" y="185" textAnchor="middle" fill="#CCCCCC" fontSize="10">
-                    Certification
-                  </text>
-
-                  {/* SMEs to Carbon Market */}
-                  <path
-                    d="M620 150 L620 220"
-                    stroke="#8B5CF6"
-                    strokeWidth="2"
-                    fill="none"
-                    markerEnd="url(#arrowhead-nonlinear)"
-                  />
-                  <text x="640" y="185" textAnchor="middle" fill="#CCCCCC" fontSize="10">
-                    Green Projects
-                  </text>
-
-                  {/* Arrowhead Marker */}
-                  <defs>
-                    <marker
-                      id="arrowhead-nonlinear"
-                      markerWidth="10"
-                      markerHeight="7"
-                      refX="9"
-                      refY="3.5"
-                      orient="auto"
-                    >
-                      <polygon points="0 0, 10 3.5, 0 7" fill="#CCCCCC" />
-                    </marker>
-                  </defs>
-                </svg>
+                <p className="text-sm text-zinc-400">
+                  This transforms an opaque, informal rural market into a creditworthy and trackable segment.
+                </p>
               </div>
             </CardContent>
           </Card>
@@ -674,28 +571,35 @@ export default function ValueChainPage() {
             <CardHeader>
               <CardTitle className="flex items-center">
                 <GitFork className="mr-2 h-5 w-5 text-primary" />
-                Value Delivery and Realization
+                Value Delivery & Realization
               </CardTitle>
-              <CardDescription>How value is delivered to customers and realized by the company</CardDescription>
+              <CardDescription>How Emata extracts and delivers value</CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                <div className="space-y-1">
-                  <h3 className="text-sm font-medium">Value Delivery</h3>
+              <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+                <div className="space-y-3">
+                  <h3 className="text-sm font-medium">Value to Farmers</h3>
                   <ul className="list-inside list-disc space-y-1 text-xs text-zinc-400">
-                    <li>Integration of green finance with blockchain and cloud technology</li>
-                    <li>Focus on financial inclusion and environmental sustainability</li>
-                    <li>Carbon-backed loans and green savings accounts for SMEs</li>
-                    <li>Strategic partnerships with Ecobank and Visa for market reach</li>
+                    <li>Instant, collateral-free loans via feature phone/WhatsApp</li>
+                    <li>Input finance and working capital in sync with planting or harvest cycles</li>
+                    <li>Embedded financial literacy and simplified onboarding via trusted local agents</li>
                   </ul>
                 </div>
-                <div className="space-y-1">
-                  <h3 className="text-sm font-medium">Value Realization</h3>
+                <div className="space-y-3">
+                  <h3 className="text-sm font-medium">Value to Agri-Partners</h3>
                   <ul className="list-inside list-disc space-y-1 text-xs text-zinc-400">
-                    <li>Revenue through loan interest and carbon credit sales</li>
-                    <li>Customer acquisition via impact-driven business model</li>
-                    <li>Market expansion across Africa and potentially Europe</li>
-                    <li>Operational efficiency through blockchain and cloud solutions</li>
+                    <li>Increased farmer loyalty (reducing side-selling)</li>
+                    <li>Higher yield and supply chain stability due to financed inputs</li>
+                    <li>Access to MIS tools that digitize and simplify cooperative operations</li>
+                  </ul>
+                </div>
+                <div className="space-y-3">
+                  <h3 className="text-sm font-medium">Value to Emata</h3>
+                  <ul className="list-inside list-disc space-y-1 text-xs text-zinc-400">
+                    <li>Interest income from loans (2.5–4.25% monthly flat)</li>
+                    <li>Platform fees from partners (e.g. enterprise/UGACOF model)</li>
+                    <li>Low operating costs due to B2B2C structure and digital distribution</li>
+                    <li>Improved repayment rates compared to banks, ensuring low portfolio-at-risk</li>
                   </ul>
                 </div>
               </div>
@@ -705,68 +609,183 @@ export default function ValueChainPage() {
           {/* Capital Supply */}
           <Card>
             <CardHeader>
-              <CardTitle>Capital Supply & Demand Flow</CardTitle>
-              <CardDescription>How capital flows through the platform ecosystem</CardDescription>
+              <CardTitle>Supply and Demand Flow</CardTitle>
+              <CardDescription>How capital and value flow through Emata's ecosystem</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="grid gap-6 md:grid-cols-2">
                 <div className="space-y-4">
-                  <div className="rounded-lg border border-zinc-800 bg-zinc-800/50 p-4">
-                    <h3 className="mb-2 text-sm font-medium text-primary">Supply: Capital Providers</h3>
-                    <p className="text-sm text-zinc-400">
-                      Corporates and financial institutions provide capital to Melanin Kapital's platform, which is then
-                      pooled and allocated to SMEs. These providers include:
-                    </p>
-                    <ul className="mt-2 space-y-1 text-sm text-zinc-400 list-disc list-inside">
-                      <li>Impact investors seeking both financial and environmental returns</li>
-                      <li>Financial institutions looking to expand their green finance portfolios</li>
-                      <li>Corporations with ESG mandates and carbon neutrality goals</li>
-                      <li>Development finance institutions supporting financial inclusion</li>
-                    </ul>
-                  </div>
-
-                  <div className="rounded-lg border border-zinc-800 bg-zinc-800/50 p-4">
-                    <h3 className="mb-2 text-sm font-medium text-primary">Platform: Melanin Kapital</h3>
-                    <p className="text-sm text-zinc-400">
-                      As the platform core, Melanin Kapital performs several critical functions:
-                    </p>
-                    <ul className="mt-2 space-y-1 text-sm text-zinc-400 list-disc list-inside">
-                      <li>Risk assessment and due diligence on SME borrowers</li>
-                      <li>Capital allocation and loan structuring</li>
-                      <li>Carbon credit verification and tokenization</li>
-                      <li>Loan servicing and repayment collection</li>
-                      <li>Returns distribution to capital providers</li>
+                  <div className="rounded-lg border border-zinc-800 bg-blue-900/20 p-4">
+                    <h3 className="mb-2 text-sm font-medium text-blue-400">Supply Side</h3>
+                    <ul className="mt-2 space-y-3 text-sm text-zinc-400 list-disc list-inside">
+                      <li>
+                        <span className="font-medium">Capital Providers:</span> Donors, Emata's own balance sheet,
+                        enterprise partners (e.g. UGACOF) fund the loan pool
+                      </li>
+                      <li>
+                        <span className="font-medium">Agri Partners:</span> Provide transaction data, farmer access, and
+                        post-harvest payment control
+                      </li>
+                      <li>
+                        <span className="font-medium">Emata Platform:</span> Orchestrates eligibility, scoring,
+                        disbursement, and collections
+                      </li>
                     </ul>
                   </div>
                 </div>
 
                 <div className="space-y-4">
-                  <div className="rounded-lg border border-zinc-800 bg-zinc-800/50 p-4">
-                    <h3 className="mb-2 text-sm font-medium text-primary">Demand: SME Borrowers</h3>
-                    <p className="text-sm text-zinc-400">
-                      Small and medium enterprises seek capital for operations, inventory, and growth. The typical SME
-                      profile includes:
-                    </p>
-                    <ul className="mt-2 space-y-1 text-sm text-zinc-400 list-disc list-inside">
-                      <li>Average of 5 employees</li>
-                      <li>Capital needs around $50,000</li>
-                      <li>Focus on sustainable business practices</li>
-                      <li>Often women-owned businesses</li>
-                      <li>Operating in underserved markets across Africa</li>
+                  <div className="rounded-lg border border-zinc-800 bg-green-900/20 p-4">
+                    <h3 className="mb-2 text-sm font-medium text-green-400">Demand Side</h3>
+                    <ul className="mt-2 space-y-3 text-sm text-zinc-400 list-disc list-inside">
+                      <li>
+                        <span className="font-medium">Farmers:</span> Demand credit for inputs and pre-harvest expenses
+                      </li>
+                      <li>
+                        <span className="font-medium">Agents:</span> Act as facilitators for loan application and
+                        field-level support
+                      </li>
                     </ul>
-                  </div>
-
-                  <div className="rounded-lg border border-zinc-800 bg-zinc-800/50 p-4">
-                    <h3 className="mb-2 text-sm font-medium text-primary">Return Flow: Value Capture</h3>
-                    <p className="text-sm text-zinc-400">Capital returns to providers through multiple channels:</p>
-                    <ul className="mt-2 space-y-1 text-sm text-zinc-400 list-disc list-inside">
-                      <li>Loan repayments with interest (0.5% to 5% monthly)</li>
-                      <li>Carbon credit trading revenues</li>
-                      <li>Transaction fees from the platform</li>
-                      <li>Environmental impact returns (carbon offsets)</li>
-                    </ul>
+                    <div className="mt-4 pt-3 border-t border-zinc-800">
+                      <p className="text-sm text-zinc-400">
+                        Repayment flows back via produce deliveries → processed by partners → repayments deducted →
+                        funds routed to Emata
+                      </p>
+                    </div>
                   </div>
                 </div>
+              </div>
+
+              <div className="mt-6 relative mx-auto h-[300px] w-full overflow-hidden rounded-lg bg-gradient-to-br from-zinc-900 to-zinc-800 p-4">
+                <div className="absolute inset-0 opacity-10">
+                  <div className="absolute left-0 top-0 h-40 w-40 rounded-full bg-blue-500/20 blur-3xl"></div>
+                  <div className="absolute bottom-0 right-0 h-60 w-60 rounded-full bg-green-500/10 blur-3xl"></div>
+                </div>
+
+                <svg width="100%" height="100%" viewBox="0 0 800 250" className="mx-auto">
+                  <defs>
+                    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                      <polygon points="0 0, 10 3.5, 0 7" fill="#CCCCCC" />
+                    </marker>
+                  </defs>
+
+                  {/* Capital Providers */}
+                  <rect
+                    x="50"
+                    y="50"
+                    width="150"
+                    height="60"
+                    rx="5"
+                    fill="rgba(59, 130, 246, 0.2)"
+                    stroke="#3B82F6"
+                    strokeWidth="2"
+                  />
+                  <text x="125" y="85" textAnchor="middle" fill="#FFFFFF" fontSize="14" fontWeight="bold">
+                    Capital Providers
+                  </text>
+
+                  {/* Emata */}
+                  <rect
+                    x="325"
+                    y="100"
+                    width="150"
+                    height="60"
+                    rx="5"
+                    fill="rgba(0, 230, 118, 0.2)"
+                    stroke="#00E676"
+                    strokeWidth="2"
+                  />
+                  <text x="400" y="135" textAnchor="middle" fill="#FFFFFF" fontSize="14" fontWeight="bold">
+                    Emata
+                  </text>
+
+                  {/* Agri Partners */}
+                  <rect
+                    x="325"
+                    y="50"
+                    width="150"
+                    height="60"
+                    rx="5"
+                    fill="rgba(59, 130, 246, 0.2)"
+                    stroke="#3B82F6"
+                    strokeWidth="2"
+                  />
+                  <text x="400" y="85" textAnchor="middle" fill="#FFFFFF" fontSize="14" fontWeight="bold">
+                    Agri Partners
+                  </text>
+
+                  {/* Farmers */}
+                  <rect
+                    x="600"
+                    y="100"
+                    width="150"
+                    height="60"
+                    rx="5"
+                    fill="rgba(16, 185, 129, 0.2)"
+                    stroke="#10B981"
+                    strokeWidth="2"
+                  />
+                  <text x="675" y="135" textAnchor="middle" fill="#FFFFFF" fontSize="14" fontWeight="bold">
+                    Farmers
+                  </text>
+
+                  {/* Flow Arrows */}
+                  {/* Capital to Emata */}
+                  <path d="M200 80 L325 130" stroke="#3B82F6" strokeWidth="2" fill="none" markerEnd="url(#arrowhead)" />
+                  <text x="250" y="95" textAnchor="middle" fill="#CCCCCC" fontSize="12">
+                    Capital
+                  </text>
+
+                  {/* Agri Partners to Emata */}
+                  <path
+                    d="M400 110 L400 100"
+                    stroke="#3B82F6"
+                    strokeWidth="2"
+                    fill="none"
+                    markerEnd="url(#arrowhead)"
+                  />
+                  <text x="420" y="105" textAnchor="middle" fill="#CCCCCC" fontSize="12">
+                    Data
+                  </text>
+
+                  {/* Emata to Farmers */}
+                  <path
+                    d="M475 130 L600 130"
+                    stroke="#00E676"
+                    strokeWidth="2"
+                    fill="none"
+                    markerEnd="url(#arrowhead)"
+                  />
+                  <text x="540" y="120" textAnchor="middle" fill="#CCCCCC" fontSize="12">
+                    Loans
+                  </text>
+
+                  {/* Farmers to Emata */}
+                  <path
+                    d="M600 160 L475 160"
+                    stroke="#10B981"
+                    strokeWidth="2"
+                    fill="none"
+                    markerEnd="url(#arrowhead)"
+                    strokeDasharray="5,5"
+                  />
+                  <text x="540" y="175" textAnchor="middle" fill="#CCCCCC" fontSize="12">
+                    Repayments
+                  </text>
+
+                  {/* Emata to Capital */}
+                  <path
+                    d="M325 160 L200 110"
+                    stroke="#00E676"
+                    strokeWidth="2"
+                    fill="none"
+                    markerEnd="url(#arrowhead)"
+                    strokeDasharray="5,5"
+                  />
+                  <text x="250" y="150" textAnchor="middle" fill="#CCCCCC" fontSize="12">
+                    Returns
+                  </text>
+                </svg>
               </div>
             </CardContent>
           </Card>
@@ -774,95 +793,69 @@ export default function ValueChainPage() {
           {/* Specialized Lending Models */}
           <Card>
             <CardHeader>
-              <CardTitle>Specialized Lending Models</CardTitle>
-              <CardDescription>Back-to-back lending and invoice discounting solutions</CardDescription>
+              <CardTitle>Lending Models</CardTitle>
+              <CardDescription>Emata's structured lending approaches</CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="grid gap-6 md:grid-cols-2">
+              <div className="grid gap-6 md:grid-cols-3">
                 <div className="rounded-lg border border-zinc-800 bg-zinc-900 p-4">
-                  <h3 className="mb-3 text-sm font-medium text-primary">Back-to-Back Lending</h3>
-                  <p className="mb-3 text-sm text-zinc-400">
-                    This model provides bridge capital for SMEs with existing contracts but insufficient working capital
-                    to fulfill them.
-                  </p>
-
+                  <h3 className="mb-3 text-sm font-medium text-primary">A. Balance Sheet Lending</h3>
                   <div className="space-y-3">
-                    <div className="rounded-lg bg-zinc-800 p-3">
-                      <h4 className="text-xs font-medium text-zinc-300">How It Works</h4>
-                      <p className="mt-1 text-xs text-zinc-400">
-                        An SME with a confirmed contract from a reputable buyer uses that contract as collateral to
-                        secure a loan. The loan amount is typically 50-70% of the contract value, allowing the SME to
-                        purchase inventory or cover operational costs to fulfill the contract.
-                      </p>
-                    </div>
-
-                    <div className="rounded-lg bg-zinc-800 p-3">
-                      <h4 className="text-xs font-medium text-zinc-300">Key Benefits</h4>
-                      <ul className="mt-1 space-y-1 text-xs text-zinc-400 list-disc list-inside">
-                        <li>Reduces risk through secured contracts</li>
-                        <li>Enables SMEs to take on larger contracts</li>
-                        <li>Short-term financing (typically 30-90 days)</li>
-                        <li>Builds credit history for future financing</li>
-                      </ul>
-                    </div>
+                    <ul className="list-inside list-disc space-y-2 text-xs text-zinc-400">
+                      <li>Capital deployed from Emata's own fund base</li>
+                      <li>Primarily used for dairy and small cooperatives</li>
+                      <li>Emata bears the default risk (except where cooperatives provide partial/full guarantees)</li>
+                    </ul>
                   </div>
                 </div>
 
                 <div className="rounded-lg border border-zinc-800 bg-zinc-900 p-4">
-                  <h3 className="mb-3 text-sm font-medium text-primary">Invoice Discounting</h3>
-                  <p className="mb-3 text-sm text-zinc-400">
-                    This solution allows SMEs to access immediate capital by selling their accounts receivable
-                    (invoices) at a discount.
-                  </p>
-
+                  <h3 className="mb-3 text-sm font-medium text-primary">B. Enterprise Lending (Off-Balance)</h3>
                   <div className="space-y-3">
-                    <div className="rounded-lg bg-zinc-800 p-3">
-                      <h4 className="text-xs font-medium text-zinc-300">How It Works</h4>
-                      <p className="mt-1 text-xs text-zinc-400">
-                        After delivering goods or services, an SME can sell its invoice to Melanin Kapital at a discount
-                        (typically 5-15% less than face value). The SME receives immediate payment, while Melanin
-                        Kapital collects the full amount from the customer when the invoice is due.
-                      </p>
-                    </div>
+                    <ul className="list-inside list-disc space-y-2 text-xs text-zinc-400">
+                      <li>Capital provided by commercial partners (e.g. UGACOF)</li>
+                      <li>Emata operates the tech, onboarding, scoring, and collections</li>
+                      <li>Enterprise bears default risk</li>
+                      <li>Fee-based revenue model for Emata</li>
+                    </ul>
+                  </div>
+                </div>
 
-                    <div className="rounded-lg bg-zinc-800 p-3">
-                      <h4 className="text-xs font-medium text-zinc-300">Key Benefits</h4>
-                      <ul className="mt-1 space-y-1 text-xs text-zinc-400 list-disc list-inside">
-                        <li>Immediate access to working capital</li>
-                        <li>No need to wait 30-90 days for payment</li>
-                        <li>Improves cash flow predictability</li>
-                        <li>No additional debt on balance sheet</li>
-                        <li>Scales with business growth</li>
-                      </ul>
-                    </div>
+                <div className="rounded-lg border border-zinc-800 bg-zinc-900 p-4">
+                  <h3 className="mb-3 text-sm font-medium text-primary">C. Hybrid Partner-Guaranteed</h3>
+                  <div className="space-y-3">
+                    <ul className="list-inside list-disc space-y-2 text-xs text-zinc-400">
+                      <li>Agri partner (e.g. Livara, Bunyonyi) provides 25%–100% loan guarantee</li>
+                      <li>Used where Emata partially bears risk but can transfer it based on partner performance</li>
+                    </ul>
                   </div>
                 </div>
               </div>
 
               <div className="mt-6 rounded-lg border border-zinc-800 bg-zinc-800/50 p-4">
-                <h3 className="mb-3 text-sm font-medium">Inventory Financing</h3>
+                <h3 className="mb-3 text-sm font-medium">Model Selection Criteria</h3>
                 <p className="text-sm text-zinc-400">
-                  For SMEs requiring short-term capital for inventory purchases, Melanin Kapital offers inventory
-                  financing solutions. This is particularly valuable for businesses with seasonal inventory needs or
-                  those looking to take advantage of bulk purchase discounts.
+                  Each lending model aligns with partner size, farmer volume, and repayment track record. As
+                  relationships mature and data quality improves, Emata can shift partners between models to optimize
+                  risk and returns.
                 </p>
                 <div className="mt-3 grid grid-cols-3 gap-3">
                   <div className="rounded-lg bg-zinc-800 p-3">
-                    <h4 className="text-xs font-medium text-zinc-300">Loan Amount</h4>
+                    <h4 className="text-xs font-medium text-zinc-300">Partner Size</h4>
                     <p className="mt-1 text-xs text-zinc-400">
-                      Typically up to $50,000, based on inventory value and business health
+                      Larger partners qualify for enterprise models; smaller ones start with balance sheet
                     </p>
                   </div>
                   <div className="rounded-lg bg-zinc-800 p-3">
-                    <h4 className="text-xs font-medium text-zinc-300">Term Length</h4>
+                    <h4 className="text-xs font-medium text-zinc-300">Data Quality</h4>
                     <p className="mt-1 text-xs text-zinc-400">
-                      Short-term, usually 3-6 months to match inventory turnover cycle
+                      Better data history enables more favorable guarantee terms
                     </p>
                   </div>
                   <div className="rounded-lg bg-zinc-800 p-3">
-                    <h4 className="text-xs font-medium text-zinc-300">Collateral</h4>
+                    <h4 className="text-xs font-medium text-zinc-300">Repayment History</h4>
                     <p className="mt-1 text-xs text-zinc-400">
-                      The inventory itself, plus carbon credits when applicable
+                      Partners with strong recovery rates qualify for reduced guarantees
                     </p>
                   </div>
                 </div>
@@ -873,61 +866,85 @@ export default function ValueChainPage() {
           {/* Platform Advantages */}
           <Card>
             <CardHeader>
-              <CardTitle>Platform Model Advantages</CardTitle>
-              <CardDescription>Benefits of the non-linear value chain approach</CardDescription>
+              <CardTitle>Value Model Advantages & Disadvantages</CardTitle>
+              <CardDescription>Strengths and vulnerabilities of Emata's approach</CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="grid gap-4 md:grid-cols-3">
-                <div className="rounded-lg border border-zinc-800 bg-zinc-800/50 p-4">
-                  <h3 className="mb-2 text-sm font-medium text-primary">Network Effects</h3>
-                  <p className="text-sm text-zinc-400">
-                    As more capital providers and SMEs join the platform, the value increases for all participants. More
-                    capital providers mean more competitive rates for SMEs, while more SMEs mean better investment
-                    opportunities for capital providers.
-                  </p>
+              <div className="grid gap-6 md:grid-cols-2">
+                <div>
+                  <h3 className="mb-4 text-sm font-medium text-green-500">✅ Advantages</h3>
+                  <div className="space-y-3">
+                    <div className="rounded-lg border border-zinc-800 bg-zinc-800/50 p-3">
+                      <h4 className="mb-1 text-xs font-medium">Low CAC & Efficient Scaling</h4>
+                      <p className="text-xs text-zinc-400">
+                        Leverages partners' existing networks and trust to acquire and manage thousands of farmers.
+                      </p>
+                    </div>
+
+                    <div className="rounded-lg border border-zinc-800 bg-zinc-800/50 p-3">
+                      <h4 className="mb-1 text-xs font-medium">High Repayment Confidence</h4>
+                      <p className="text-xs text-zinc-400">
+                        Embedded repayment via crop delivery reduces risk and bypasses traditional enforcement
+                        challenges.
+                      </p>
+                    </div>
+
+                    <div className="rounded-lg border border-zinc-800 bg-zinc-800/50 p-3">
+                      <h4 className="mb-1 text-xs font-medium">Data Flywheel</h4>
+                      <p className="text-xs text-zinc-400">
+                        Continuous collection of yield, pricing, and repayment behavior improves algorithm accuracy.
+                      </p>
+                    </div>
+
+                    <div className="rounded-lg border border-zinc-800 bg-zinc-800/50 p-3">
+                      <h4 className="mb-1 text-xs font-medium">Multi-sector Application</h4>
+                      <p className="text-xs text-zinc-400">
+                        Adaptable across crops (dairy, coffee, cocoa, potatoes) and geographies (Uganda, future East
+                        Africa).
+                      </p>
+                    </div>
+                  </div>
                 </div>
 
-                <div className="rounded-lg border border-zinc-800 bg-zinc-800/50 p-4">
-                  <h3 className="mb-2 text-sm font-medium text-primary">Reduced Transaction Costs</h3>
-                  <p className="text-sm text-zinc-400">
-                    By centralizing due diligence, loan servicing, and carbon credit verification, the platform
-                    significantly reduces the transaction costs that would exist in traditional bilateral lending
-                    relationships.
-                  </p>
-                </div>
+                <div>
+                  <h3 className="mb-4 text-sm font-medium text-amber-500">⚠️ Disadvantages / Vulnerabilities</h3>
+                  <div className="space-y-3">
+                    <div className="rounded-lg border border-zinc-800 bg-zinc-800/50 p-3">
+                      <h4 className="mb-1 text-xs font-medium">Partner Dependency</h4>
+                      <p className="text-xs text-zinc-400">
+                        Operational risk if a cooperative fails to perform or withholds repayments.
+                      </p>
+                    </div>
 
-                <div className="rounded-lg border border-zinc-800 bg-zinc-800/50 p-4">
-                  <h3 className="mb-2 text-sm font-medium text-primary">Scalability</h3>
-                  <p className="text-sm text-zinc-400">
-                    The platform model allows Melanin Kapital to scale across multiple markets without proportional
-                    increases in operational costs. Technology infrastructure enables efficient expansion to new
-                    regions.
-                  </p>
-                </div>
+                    <div className="rounded-lg border border-zinc-800 bg-zinc-800/50 p-3">
+                      <h4 className="mb-1 text-xs font-medium">Data Gaps & Sync Delays</h4>
+                      <p className="text-xs text-zinc-400">
+                        MIS dependency means poor data updates can lead to bad scoring decisions.
+                      </p>
+                    </div>
 
-                <div className="rounded-lg border border-zinc-800 bg-zinc-800/50 p-4">
-                  <h3 className="mb-2 text-sm font-medium text-primary">Data Advantages</h3>
-                  <p className="text-sm text-zinc-400">
-                    Each transaction generates valuable data that improves risk assessment, pricing models, and customer
-                    targeting. This creates a virtuous cycle of better lending decisions and reduced defaults.
-                  </p>
-                </div>
+                    <div className="rounded-lg border border-zinc-800 bg-zinc-800/50 p-3">
+                      <h4 className="mb-1 text-xs font-medium">Agent Misalignment</h4>
+                      <p className="text-xs text-zinc-400">
+                        Field agents are not direct Emata staff, creating quality variance in onboarding and
+                        collections.
+                      </p>
+                    </div>
 
-                <div className="rounded-lg border border-zinc-800 bg-zinc-800/50 p-4">
-                  <h3 className="mb-2 text-sm font-medium text-primary">Ecosystem Integration</h3>
-                  <p className="text-sm text-zinc-400">
-                    The platform can easily integrate with other financial services, carbon markets, and banking
-                    partners, creating a comprehensive ecosystem for sustainable finance.
-                  </p>
-                </div>
-
-                <div className="rounded-lg border border-zinc-800 bg-zinc-800/50 p-4">
-                  <h3 className="mb-2 text-sm font-medium text-primary">Impact Amplification</h3>
-                  <p className="text-sm text-zinc-400">
-                    By connecting capital to underserved SMEs and linking financing to carbon credits, the platform
-                    amplifies both financial inclusion and environmental impact beyond what traditional linear models
-                    could achieve.
-                  </p>
+                    <div className="rounded-lg border border-zinc-800 bg-zinc-800/50 p-3">
+                      <h4 className="mb-1 text-xs font-medium">Variable Guarantee Models</h4>
+                      <p className="text-xs text-zinc-400">
+                        Inconsistent risk mitigation depending on partner strength.
+                      </p>
+                    </div>
+                    <div className="rounded-lg border border-zinc-800 bg-zinc-800/50 p-3">
+                      <h4 className="mb-1 text-xs font-medium">Product-Market Fit Challenges</h4>
+                      <p className="text-xs text-zinc-400">
+                        Finding product market fit in developing countries with sensible unit economics remains
+                        challenging due to income constraints and infrastructure limitations.
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </CardContent>
@@ -994,7 +1011,7 @@ export default function ValueChainPage() {
             </div>
           </div>
           <div className="flex justify-end">
-            <Button variant="outline" onClick={() => setStakeholderDialogOpen(false)}>
+            <Button variant="outline" onClick={() => setDialogOpen(false)}>
               Close
             </Button>
           </div>

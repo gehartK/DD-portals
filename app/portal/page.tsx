@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
-import { Users, Leaf, DollarSign, BarChart3, Zap, Shield, Settings, Database } from "lucide-react"
+import { Users, DollarSign, BarChart3, Zap, Shield, Settings, Database } from "lucide-react"
 
 // Update the RadarChart component to move the legend to the right side
 // Replace the RadarChart function with:
@@ -77,6 +77,7 @@ function RadarChart({ data }) {
     const formatDimension = (dim) => {
       // Replace dataSecurity with solutionComponents in the display
       if (dim === "dataSecurity") return "Solution Components"
+      if (dim === "solutionComponents") return "Solution Components"
 
       return dim
         .replace(/([A-Z])/g, " $1") // Add space before capital letters
@@ -180,15 +181,15 @@ function RadarChart({ data }) {
 export default function PortalPage() {
   // Update the matrixData state variable with the new scores
   const [matrixData, setMatrixData] = useState({
-    criticalSkills: 5.0,
-    keyMetrics: 4.9,
-    strategicGrowth: 5.5,
-    integrity: 6.0,
-    performanceEfficiency: 4.3,
-    operationalExcellence: 4.8,
-    solutionComponents: 3.9,
-    reliability: 6.0,
-    costOptimization: 5.2,
+    criticalSkills: 6.9,
+    keyMetrics: 7.2,
+    strategicGrowth: 7.5,
+    integrity: 7.4,
+    performanceEfficiency: 6.4,
+    operationalExcellence: 6.6,
+    solutionComponents: 6.8,
+    reliability: 6.7,
+    costOptimization: 7.1,
   })
 
   const calculateBMS = () => {
@@ -267,72 +268,44 @@ export default function PortalPage() {
         <p className="text-zinc-400">Well Architected Business Solution Matrix (WAB-SM) Assessment</p>
       </div>
 
-      {/* Company Summary Section - Minimalist Design */}
-      <Card className="border-zinc-800 bg-zinc-900">
-        <CardContent className="p-6">
-          <div className="flex items-center gap-4">
-            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
-              <Leaf className="h-6 w-6" />
-            </div>
-            <div>
-              <h2 className="text-xl font-bold text-white">Melanin Kapital</h2>
-              <p className="text-zinc-400">Carbon Neobank for African SMEs</p>
-            </div>
-          </div>
-
-          <div className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div>
-              <h3 className="text-sm font-medium text-zinc-300 mb-1">Leadership</h3>
-              <p className="text-sm text-zinc-400">Melanie Keita Mariam (CEO)</p>
-              <p className="text-sm text-zinc-400">Ian Minjire Kibira (COO)</p>
-            </div>
-
-            <div>
-              <h3 className="text-sm font-medium text-zinc-300 mb-1">Founded</h3>
-              <p className="text-sm text-zinc-400">2020, Nairobi, Kenya</p>
-            </div>
-
-            <div>
-              <h3 className="text-sm font-medium text-zinc-300 mb-1">Industry</h3>
-              <p className="text-sm text-zinc-400">Fintech, CleanTech</p>
-            </div>
-
-            <div>
-              <h3 className="text-sm font-medium text-zinc-300 mb-1">Revenue (YTD)</h3>
-              <p className="text-sm text-zinc-400">$176,000 (2024)</p>
-            </div>
-          </div>
-
-          <div className="mt-6 pt-6 border-t border-zinc-800">
-            <h3 className="text-sm font-medium text-zinc-300 mb-2">Mission</h3>
-            <p className="text-sm text-zinc-400">
-              To enable African businesses to access financing and reduce their carbon footprint, while contributing to
-              Africa's growing voluntary carbon markets.
-            </p>
-          </div>
-        </CardContent>
-      </Card>
-
-      <div className="grid gap-4 md:grid-cols-3">
-        {/* Business Maturity Score - Minimalist Design */}
-        <Card className="border-zinc-800 bg-zinc-900">
+      {/* Business Maturity Score - Enhanced to emphasize as final score */}
+      <Card className="border-zinc-800 bg-gradient-to-r from-zinc-900 to-zinc-800 overflow-hidden">
+        <div className="border-l-4 border-primary">
           <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium text-zinc-300">Business Maturity Score</CardTitle>
+            <div className="flex items-center justify-between">
+              <CardTitle className="text-lg font-medium text-white flex items-center gap-2">
+                <span className="bg-primary/20 p-1.5 rounded-full">
+                  <BarChart3 className="h-5 w-5 text-primary" />
+                </span>
+                Final Business Maturity Score
+              </CardTitle>
+              <span className="bg-zinc-800 px-3 py-1 rounded-full text-xs font-medium text-primary">
+                Composite Score
+              </span>
+            </div>
+            <CardDescription className="text-zinc-400">
+              Overall assessment based on all nine critical dimensions
+            </CardDescription>
           </CardHeader>
-          <CardContent>
+          <CardContent className="pb-4">
             <div className="flex items-end gap-2">
-              <div className="text-3xl font-bold text-white">{bms.toFixed(1)}</div>
+              <div className="text-4xl font-bold text-primary">{bms.toFixed(1)}</div>
               <div className="text-sm text-zinc-400 mb-1">/10</div>
             </div>
-            <Progress value={bms * 10} className="mt-2 h-1.5 bg-zinc-800" />
+            <Progress value={bms * 10} className="mt-2 h-2 bg-zinc-800" indicatorColor="bg-primary" />
             <div className="mt-4 flex items-center justify-between">
               <p className="text-xs text-zinc-400">Maturity Phase</p>
-              <span className="text-xs px-2 py-1 rounded-full bg-zinc-800 text-zinc-300">{getMaturityPhase(bms)}</span>
+              <span className="text-xs px-2 py-1 rounded-full bg-primary/20 text-primary font-medium">
+                {getMaturityPhase(bms)}
+              </span>
             </div>
             <p className="mt-3 text-xs text-zinc-500">5/10 represents industry standard</p>
           </CardContent>
-        </Card>
+        </div>
+      </Card>
 
+      {/* Change the grid layout for the highest and lowest scoring dimension cards */}
+      <div className="grid gap-4 md:grid-cols-2">
         {/* Highest Scoring Dimension - Minimalist Design */}
         <Card className="border-zinc-800 bg-zinc-900">
           <CardHeader className="pb-2">
@@ -385,210 +358,398 @@ export default function PortalPage() {
         </CardContent>
       </Card>
 
-      {/* Architectural Theme Tiles */}
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3s-3">
-        <Card className="border-zinc-800 bg-zinc-900 overflow-hidden transition-all duration-200 hover:border-primary/20 hover:shadow-md hover:shadow-primary/5">
-          <div className="bg-gradient-to-r from-zinc-800/50 to-zinc-900 p-1">
-            <CardHeader>
-              <CardTitle className="text-white flex items-center gap-2">
-                <Zap className="h-5 w-5 text-primary" />
-                Business Model
+      {/* Investable Business Case Section */}
+      <div>
+        <h2 className="text-xl font-semibold text-white mb-4">Investable Business Case</h2>
+        <div className="grid gap-4 grid-cols-1 md:grid-cols-3">
+          <Card className="border-zinc-800 bg-zinc-900 overflow-hidden transition-all duration-200 hover:border-primary/20 hover:shadow-md hover:shadow-primary/5">
+            <div className="bg-gradient-to-r from-zinc-800/50 to-zinc-900 p-1">
+              <CardHeader className="pb-2">
+                <CardTitle className="text-white flex items-center gap-2 text-sm">
+                  <Zap className="h-4 w-4 text-primary" />
+                  Business Model
+                </CardTitle>
+              </CardHeader>
+            </div>
+            <CardContent className="pt-2">
+              <div className="text-xl font-bold text-white">
+                {(
+                  (matrixData.performanceEfficiency +
+                    matrixData.operationalExcellence +
+                    matrixData.solutionComponents) /
+                  3
+                ).toFixed(1)}
+                /10
+              </div>
+              <Progress
+                value={
+                  ((matrixData.performanceEfficiency +
+                    matrixData.operationalExcellence +
+                    matrixData.solutionComponents) /
+                    3) *
+                  10
+                }
+                className="mt-2 h-1.5 bg-zinc-800"
+              />
+              <div className="mt-3 space-y-1">
+                <div className="flex items-center justify-between text-xs">
+                  <span className="text-zinc-400">Performance Efficiency</span>
+                  <span className="text-zinc-300 font-medium">{matrixData.performanceEfficiency}/10</span>
+                </div>
+                <div className="flex items-center justify-between text-xs">
+                  <span className="text-zinc-400">Operational Excellence</span>
+                  <span className="text-zinc-300 font-medium">{matrixData.operationalExcellence}/10</span>
+                </div>
+                <div className="flex items-center justify-between text-xs">
+                  <span className="text-zinc-400">Solution Components</span>
+                  <span className="text-zinc-300 font-medium">{matrixData.solutionComponents}/10</span>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="border-zinc-800 bg-zinc-900">
+            <CardHeader className="pb-2">
+              <CardTitle className="text-white flex items-center gap-2 text-sm">
+                <Shield className="h-4 w-4 text-primary" />
+                Leadership
               </CardTitle>
             </CardHeader>
-          </div>
-          <CardContent className="pt-4">
-            <div className="text-2xl font-bold text-white">
-              {(
-                (matrixData.performanceEfficiency + matrixData.operationalExcellence + matrixData.solutionComponents) /
-                3
-              ).toFixed(1)}
-              /10
-            </div>
-            <Progress
-              value={
-                ((matrixData.performanceEfficiency + matrixData.operationalExcellence + matrixData.solutionComponents) /
-                  3) *
-                10
-              }
-              className="mt-2 h-2 bg-zinc-800"
-            />
-            <div className="mt-4 space-y-2">
-              <div className="flex items-center justify-between text-sm">
-                <span className="text-zinc-400">Performance Efficiency</span>
-                <span className="text-zinc-300 font-medium">{matrixData.performanceEfficiency}/10</span>
+            <CardContent className="pt-2">
+              <div className="text-xl font-bold text-white">
+                {((matrixData.criticalSkills + matrixData.integrity + matrixData.reliability) / 3).toFixed(1)}/10
               </div>
-              <div className="flex items-center justify-between text-sm">
-                <span className="text-zinc-400">Operational Excellence</span>
-                <span className="text-zinc-300 font-medium">{matrixData.operationalExcellence}/10</span>
+              <Progress
+                value={((matrixData.criticalSkills + matrixData.integrity + matrixData.reliability) / 3) * 10}
+                className="mt-2 h-1.5 bg-zinc-800"
+              />
+              <div className="mt-3 space-y-1">
+                <div className="flex items-center justify-between text-xs">
+                  <span className="text-zinc-400">Critical Skills</span>
+                  <span className="text-zinc-300">{matrixData.criticalSkills}/10</span>
+                </div>
+                <div className="flex items-center justify-between text-xs">
+                  <span className="text-zinc-400">Integrity</span>
+                  <span className="text-zinc-300">{matrixData.integrity}/10</span>
+                </div>
+                <div className="flex items-center justify-between text-xs">
+                  <span className="text-zinc-400">Reliability</span>
+                  <span className="text-zinc-300">{matrixData.reliability}/10</span>
+                </div>
               </div>
-              <div className="flex items-center justify-between text-sm">
-                <span className="text-zinc-400">Solution Components</span>
-                <span className="text-zinc-300 font-medium">{matrixData.solutionComponents}/10</span>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+            </CardContent>
+          </Card>
 
+          <Card className="border-zinc-800 bg-zinc-900">
+            <CardHeader className="pb-2">
+              <CardTitle className="text-white flex items-center gap-2 text-sm">
+                <DollarSign className="h-4 w-4 text-primary" />
+                Predictable Cashflow
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="pt-2">
+              <div className="text-xl font-bold text-white">
+                {((matrixData.keyMetrics + matrixData.strategicGrowth + matrixData.costOptimization) / 3).toFixed(1)}
+                /10
+              </div>
+              <Progress
+                value={((matrixData.keyMetrics + matrixData.strategicGrowth + matrixData.costOptimization) / 3) * 10}
+                className="mt-2 h-1.5 bg-zinc-800"
+              />
+              <div className="mt-3 space-y-1">
+                <div className="flex items-center justify-between text-xs">
+                  <span className="text-zinc-400">Key Metrics</span>
+                  <span className="text-zinc-300">{matrixData.keyMetrics}/10</span>
+                </div>
+                <div className="flex items-center justify-between text-xs">
+                  <span className="text-zinc-400">Strategic Growth</span>
+                  <span className="text-zinc-300">{matrixData.strategicGrowth}/10</span>
+                </div>
+                <div className="flex items-center justify-between text-xs">
+                  <span className="text-zinc-400">Cost Optimization</span>
+                  <span className="text-zinc-300">{matrixData.costOptimization}/10</span>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+
+      {/* Target Operating Model Section */}
+      <div>
+        <h2 className="text-xl font-semibold text-white mb-4">Target Operating Model</h2>
+        <div className="grid gap-4 grid-cols-1 md:grid-cols-3">
+          <Card className="border-zinc-800 bg-zinc-900">
+            <CardHeader className="pb-2">
+              <CardTitle className="text-white flex items-center gap-2 text-sm">
+                <Users className="h-4 w-4 text-primary" />
+                People
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="pt-2">
+              <div className="text-xl font-bold text-white">
+                {((matrixData.criticalSkills + matrixData.keyMetrics + matrixData.operationalExcellence) / 3).toFixed(
+                  1,
+                )}
+                /10
+              </div>
+              <Progress
+                value={
+                  ((matrixData.criticalSkills + matrixData.keyMetrics + matrixData.operationalExcellence) / 3) * 10
+                }
+                className="mt-2 h-1.5 bg-zinc-800"
+              />
+              <div className="mt-3 space-y-1">
+                <div className="flex items-center justify-between text-xs">
+                  <span className="text-zinc-400">Critical Skills</span>
+                  <span className="text-zinc-300">{matrixData.criticalSkills}/10</span>
+                </div>
+                <div className="flex items-center justify-between text-xs">
+                  <span className="text-zinc-400">Key Metrics</span>
+                  <span className="text-zinc-300">{matrixData.keyMetrics}/10</span>
+                </div>
+                <div className="flex items-center justify-between text-xs">
+                  <span className="text-zinc-400">Operational Excellence</span>
+                  <span className="text-zinc-300">{matrixData.operationalExcellence}/10</span>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="border-zinc-800 bg-zinc-900">
+            <CardHeader className="pb-2">
+              <CardTitle className="text-white flex items-center gap-2 text-sm">
+                <Settings className="h-4 w-4 text-primary" />
+                Processes
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="pt-2">
+              <div className="text-xl font-bold text-white">
+                {((matrixData.strategicGrowth + matrixData.integrity + matrixData.performanceEfficiency) / 3).toFixed(
+                  1,
+                )}
+                /10
+              </div>
+              <Progress
+                value={
+                  ((matrixData.strategicGrowth + matrixData.integrity + matrixData.performanceEfficiency) / 3) * 10
+                }
+                className="mt-2 h-1.5 bg-zinc-800"
+              />
+              <div className="mt-3 space-y-1">
+                <div className="flex items-center justify-between text-xs">
+                  <span className="text-zinc-400">Strategic Growth</span>
+                  <span className="text-zinc-300">{matrixData.strategicGrowth}/10</span>
+                </div>
+                <div className="flex items-center justify-between text-xs">
+                  <span className="text-zinc-400">Integrity</span>
+                  <span className="text-zinc-300">{matrixData.integrity}/10</span>
+                </div>
+                <div className="flex items-center justify-between text-xs">
+                  <span className="text-zinc-400">Performance Efficiency</span>
+                  <span className="text-zinc-300">{matrixData.performanceEfficiency}/10</span>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="border-zinc-800 bg-zinc-900">
+            <CardHeader className="pb-2">
+              <CardTitle className="text-white flex items-center gap-2 text-sm">
+                <Database className="h-4 w-4 text-primary" />
+                Technology
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="pt-2">
+              <div className="text-xl font-bold text-white">
+                {((matrixData.solutionComponents + matrixData.reliability + matrixData.costOptimization) / 3).toFixed(
+                  1,
+                )}
+                /10
+              </div>
+              <Progress
+                value={
+                  ((matrixData.solutionComponents + matrixData.reliability + matrixData.costOptimization) / 3) * 10
+                }
+                className="mt-2 h-1.5 bg-zinc-800"
+              />
+              <div className="mt-3 space-y-1">
+                <div className="flex items-center justify-between text-xs">
+                  <span className="text-zinc-400">Solution Components</span>
+                  <span className="text-zinc-300">{matrixData.solutionComponents}/10</span>
+                </div>
+                <div className="flex items-center justify-between text-xs">
+                  <span className="text-zinc-400">Reliability</span>
+                  <span className="text-zinc-300">{matrixData.reliability}/10</span>
+                </div>
+                <div className="flex items-center justify-between text-xs">
+                  <span className="text-zinc-400">Cost Optimization</span>
+                  <span className="text-zinc-300">{matrixData.costOptimization}/10</span>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+
+      {/* Score Consistency and Conservative Adjustments moved to the bottom */}
+      <div className="grid gap-4 md:grid-cols-2">
+        {/* Score Consistency Section */}
         <Card className="border-zinc-800 bg-zinc-900">
           <CardHeader>
             <CardTitle className="text-white flex items-center gap-2">
-              <Shield className="h-5 w-5 text-primary" />
-              Business Management
+              <BarChart3 className="h-5 w-5 text-primary" />
+              Score Consistency
             </CardTitle>
+            <CardDescription className="text-zinc-400">
+              Justification for the assessment scores based on company context
+            </CardDescription>
           </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold text-white">
-              {((matrixData.criticalSkills + matrixData.integrity + matrixData.reliability) / 3).toFixed(1)}/10
+          <CardContent className="space-y-4">
+            <div>
+              <p className="text-sm text-zinc-400 mb-2">
+                Based on the holistic review of Emata's materials, transcripts, financials, and tech documentation, the
+                WAB-SM scores are broadly fair and consistent when viewed through the lens of:
+              </p>
+              <ul className="list-disc pl-5 text-sm text-zinc-400 space-y-1">
+                <li>A pre-profit, early-scale micro-lending business</li>
+                <li>Operating in low-infrastructure environments (East Africa)</li>
+                <li>Now expanding cross-border with a relatively lean team</li>
+                <li>Delivering financial services to high-risk, underserved customer segments</li>
+              </ul>
             </div>
-            <Progress
-              value={((matrixData.criticalSkills + matrixData.integrity + matrixData.reliability) / 3) * 10}
-              className="mt-2 h-1.5"
-            />
-            <div className="mt-4 space-y-2">
-              <div className="flex items-center justify-between text-sm">
-                <span className="text-zinc-400">Critical Skills</span>
-                <span className="text-zinc-300">{matrixData.criticalSkills}/10</span>
-              </div>
-              <div className="flex items-center justify-between text-sm">
-                <span className="text-zinc-400">Integrity</span>
-                <span className="text-zinc-300">{matrixData.integrity}/10</span>
-              </div>
-              <div className="flex items-center justify-between text-sm">
-                <span className="text-zinc-400">Reliability</span>
-                <span className="text-zinc-300">{matrixData.reliability}/10</span>
+
+            <div>
+              <h3 className="text-sm font-medium text-primary mb-2 flex items-center">
+                <span className="mr-2">🎯</span> Key Observations Justifying Score Consistency
+              </h3>
+              <p className="text-sm text-zinc-400 mb-2">
+                Scores cluster in the 6.4–7.5 range → reflects above-average capability for stage and context, but not
+                excellence (8–10) which would demand demonstrated resilience at scale, automation maturity, and global
+                controls.
+              </p>
+
+              <div className="space-y-3 mt-3">
+                <div>
+                  <p className="text-sm font-medium text-zinc-300">
+                    Critical Skills (6.9), Strategic Growth (7.5), Key Metrics (7.2):
+                  </p>
+                  <ul className="list-disc pl-5 text-sm text-zinc-400 space-y-1">
+                    <li>
+                      These are strongly supported by the documentation. The team is credible, traction is real, and
+                      growth potential is evident.
+                    </li>
+                    <li>
+                      Above average but not outstanding — appropriate for a Series A-level venture still refining
+                      infrastructure and model consistency.
+                    </li>
+                  </ul>
+                </div>
+
+                <div>
+                  <p className="text-sm font-medium text-zinc-300">
+                    Lower scores in areas like Performance Efficiency (6.4) and Operational Excellence (6.6):
+                  </p>
+                  <ul className="list-disc pl-5 text-sm text-zinc-400 space-y-1">
+                    <li>
+                      Rightly reflect friction such as manual data processes, lack of SOPs, and inconsistent automation
+                      — meaningful weaknesses for a tech-led lender.
+                    </li>
+                    <li>
+                      These are typical for early-stage startups, especially in emerging markets — but will become
+                      critical gaps at scale if unaddressed.
+                    </li>
+                  </ul>
+                </div>
+
+                <div>
+                  <p className="text-sm font-medium text-zinc-300">Integrity (7.4) and Cost Optimization (7.1):</p>
+                  <ul className="list-disc pl-5 text-sm text-zinc-400 space-y-1">
+                    <li>
+                      Scores are slightly higher due to verifiable audited compliance, governance structures, and
+                      disciplined resource use.
+                    </li>
+                    <li>These are strategic strengths that help offset executional inefficiencies.</li>
+                  </ul>
+                </div>
+
+                <div>
+                  <p className="text-sm font-medium text-zinc-300">No exaggerated 8+ scores:</p>
+                  <ul className="list-disc pl-5 text-sm text-zinc-400 space-y-1">
+                    <li>
+                      Emata is not yet demonstrating category-defining excellence in any WAB-SM pillar (e.g., autonomous
+                      ML pipelines, negative CAC, zero-downtime infra), which would be required to justify higher
+                      ratings.
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
           </CardContent>
         </Card>
 
-        <Card className="border-zinc-800 bg-zinc-900">
-          <CardHeader>
-            <CardTitle className="text-white flex items-center gap-2">
-              <DollarSign className="h-5 w-5 text-primary" />
-              Predictable Cashflow
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold text-white">
-              {((matrixData.keyMetrics + matrixData.strategicGrowth + matrixData.costOptimization) / 3).toFixed(1)}
-              /10
-            </div>
-            <Progress
-              value={((matrixData.keyMetrics + matrixData.strategicGrowth + matrixData.costOptimization) / 3) * 10}
-              className="mt-2 h-1.5"
-            />
-            <div className="mt-4 space-y-2">
-              <div className="flex items-center justify-between text-sm">
-                <span className="text-zinc-400">Key Metrics</span>
-                <span className="text-zinc-300">{matrixData.keyMetrics}/10</span>
-              </div>
-              <div className="flex items-center justify-between text-sm">
-                <span className="text-zinc-400">Strategic Growth</span>
-                <span className="text-zinc-300">{matrixData.strategicGrowth}/10</span>
-              </div>
-              <div className="flex items-center justify-between text-sm">
-                <span className="text-zinc-400">Cost Optimization</span>
-                <span className="text-zinc-300">{matrixData.costOptimization}/10</span>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card className="border-zinc-800 bg-zinc-900">
-          <CardHeader>
-            <CardTitle className="text-white flex items-center gap-2">
-              <Users className="h-5 w-5 text-primary" />
-              People
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold text-white">
-              {((matrixData.criticalSkills + matrixData.keyMetrics + matrixData.operationalExcellence) / 3).toFixed(1)}
-              /10
-            </div>
-            <Progress
-              value={((matrixData.criticalSkills + matrixData.keyMetrics + matrixData.operationalExcellence) / 3) * 10}
-              className="mt-2 h-1.5"
-            />
-            <div className="mt-4 space-y-2">
-              <div className="flex items-center justify-between text-sm">
-                <span className="text-zinc-400">Critical Skills</span>
-                <span className="text-zinc-300">{matrixData.criticalSkills}/10</span>
-              </div>
-              <div className="flex items-center justify-between text-sm">
-                <span className="text-zinc-400">Key Metrics</span>
-                <span className="text-zinc-300">{matrixData.keyMetrics}/10</span>
-              </div>
-              <div className="flex items-center justify-between text-sm">
-                <span className="text-zinc-400">Operational Excellence</span>
-                <span className="text-zinc-300">{matrixData.operationalExcellence}/10</span>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
+        {/* Conservative Adjustments Section */}
         <Card className="border-zinc-800 bg-zinc-900">
           <CardHeader>
             <CardTitle className="text-white flex items-center gap-2">
               <Settings className="h-5 w-5 text-primary" />
-              Processes
+              Conservative Adjustments
             </CardTitle>
+            <CardDescription className="text-zinc-400">
+              Potential score refinements based on a more conservative assessment
+            </CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-white">
-              {((matrixData.strategicGrowth + matrixData.integrity + matrixData.performanceEfficiency) / 3).toFixed(1)}
-              /10
-            </div>
-            <Progress
-              value={((matrixData.strategicGrowth + matrixData.integrity + matrixData.performanceEfficiency) / 3) * 10}
-              className="mt-2 h-1.5"
-            />
-            <div className="mt-4 space-y-2">
-              <div className="flex items-center justify-between text-sm">
-                <span className="text-zinc-400">Strategic Growth</span>
-                <span className="text-zinc-300">{matrixData.strategicGrowth}/10</span>
-              </div>
-              <div className="flex items-center justify-between text-sm">
-                <span className="text-zinc-400">Integrity</span>
-                <span className="text-zinc-300">{matrixData.integrity}/10</span>
-              </div>
-              <div className="flex items-center justify-between text-sm">
-                <span className="text-zinc-400">Performance Efficiency</span>
-                <span className="text-zinc-300">{matrixData.performanceEfficiency}/10</span>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+            <div>
+              <h3 className="text-sm font-medium text-amber-500 mb-2 flex items-center">
+                <span className="mr-2">⚠️</span> Where Adjustments Could Be Justified:
+              </h3>
 
-        <Card className="border-zinc-800 bg-zinc-900">
-          <CardHeader>
-            <CardTitle className="text-white flex items-center gap-2">
-              <Database className="h-5 w-5 text-primary" />
-              Technology
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold text-white">
-              {((matrixData.solutionComponents + matrixData.reliability + matrixData.costOptimization) / 3).toFixed(1)}
-              /10
-            </div>
-            <Progress
-              value={((matrixData.solutionComponents + matrixData.reliability + matrixData.costOptimization) / 3) * 10}
-              className="mt-2 h-1.5"
-            />
-            <div className="mt-4 space-y-2">
-              <div className="flex items-center justify-between text-sm">
-                <span className="text-zinc-400">Solution Components</span>
-                <span className="text-zinc-300">{matrixData.solutionComponents}/10</span>
+              <div className="overflow-x-auto">
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="border-b border-zinc-800">
+                      <th className="text-left py-2 text-zinc-400 font-medium">Dimension</th>
+                      <th className="text-center py-2 text-zinc-400 font-medium">Original Score</th>
+                      <th className="text-center py-2 text-zinc-400 font-medium">Possible Adjusted</th>
+                      <th className="text-left py-2 text-zinc-400 font-medium">Rationale</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-zinc-800">
+                    <tr>
+                      <td className="py-3 text-zinc-300">Solution Components</td>
+                      <td className="py-3 text-center text-zinc-300">6.8</td>
+                      <td className="py-3 text-center text-amber-500">6.5</td>
+                      <td className="py-3 text-zinc-400">
+                        Tech stack is modern but lacks MLOps rigor, SOP coverage, and user segmentation depth.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="py-3 text-zinc-300">Performance Efficiency</td>
+                      <td className="py-3 text-center text-zinc-300">6.4</td>
+                      <td className="py-3 text-center text-amber-500">6.2</td>
+                      <td className="py-3 text-zinc-400">
+                        Manual processes, data entry fragility, and productivity leakage are greater than peers with
+                        similar capital raised.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="py-3 text-zinc-300">Operational Excellence</td>
+                      <td className="py-3 text-center text-zinc-300">6.6</td>
+                      <td className="py-3 text-center text-amber-500">6.3</td>
+                      <td className="py-3 text-zinc-400">
+                        Credit workflows strong, but system automation and SOP maturity are below cross-border expansion
+                        readiness.
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
-              <div className="flex items-center justify-between text-sm">
-                <span className="text-zinc-400">Reliability</span>
-                <span className="text-zinc-300">{matrixData.reliability}/10</span>
-              </div>
-              <div className="flex items-center justify-between text-sm">
-                <span className="text-zinc-400">Cost Optimization</span>
-                <span className="text-zinc-300">{matrixData.costOptimization}/10</span>
-              </div>
+
+              <p className="text-sm text-zinc-400 mt-4">
+                These adjustments are minor (0.2–0.3), and would mostly reflect a slightly more conservative view given
+                the company's shift into multi-country scale.
+              </p>
             </div>
           </CardContent>
         </Card>

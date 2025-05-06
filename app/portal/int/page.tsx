@@ -1,59 +1,61 @@
 "use client"
-
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Brain } from "lucide-react"
+import { Shield } from "lucide-react"
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer, Legend } from "recharts"
 
-export default function CriticalSkillsPage() {
+export default function IntPage() {
   const components = [
     {
-      id: "team-composition",
-      title: "Team Composition & Expertise",
+      id: "ethical-standards",
+      title: "Ethical Standards & Transparency",
       score: 7.5,
-      standard: 6.0,
-      summary: "Highly experienced founding team with deep domain expertise",
+      standard: 5.0,
+      summary: "Strong ethical focus with clear terms and mission-driven culture",
       description:
-        "The founding team is highly experienced, with deep overlap in agriculture, credit, technology, and product. Technical and data leaders (CTO, CDSO) are hands-on and strategically aligned. The core engineering team consists of full-stack developers with .NET experience, while the AI/data science team includes advanced ML and ops specialists. External leadership support from Dutch holding company and accelerators provides cross-market insight.",
+        "All partner and farmer contracts include explicit terms on data rights, consent, and fairness. Farmer agreements clearly outline default handling, extension terms, and blacklist procedures in local language formats. Team culture is deeply mission-driven and articulated through a combination of verbal leadership, formal contracts, and conduct-based escalation channels. Strong emphasis on fairness, especially around restructuring and farmer support during delays or shocks.",
     },
     {
-      id: "management-practices",
-      title: "Management Practices",
+      id: "regulatory-compliance",
+      title: "Regulatory Compliance",
+      score: 7.8,
+      standard: 5.0,
+      summary: "Fully licensed with active regulatory engagement",
+      description:
+        "Emata is fully licensed under the Uganda Microfinance Regulatory Authority (UMRA), with active engagement on compliance matters. Contracts, lending terms, and disbursements are compliant with Uganda's Tier 4 Microfinance Institutions and Money Lenders Act. Legal registration and regulatory clarity confirmed through audited statements and national databases. GDPR-adjacent consent terms are used, especially on data use and 3rd-party integrations.",
+    },
+    {
+      id: "financial-transparency",
+      title: "Financial Transparency & Reporting",
+      score: 7.3,
+      standard: 5.0,
+      summary: "Independently audited with strong financial governance",
+      description:
+        "Audited annually by independent firms (Grant Thornton in 2022, Baker Tilly in 2023), with no adverse findings or disclosures. Financial statements follow IFRS and are approved by the board, ensuring procedural and ethical rigor. Budgeting is split between operating company and lending entity to ensure traceability. Monthly financial tracking supported by board and internal accounting team.",
+    },
+    {
+      id: "social-responsibility",
+      title: "Commitment to Social Responsibility",
       score: 7.0,
-      standard: 5.5,
-      summary: "Strong execution clarity with active founder involvement",
-      description:
-        "Strong execution clarity across product, lending, and data roadmap. Founders are actively involved in all strategic and operational decisions. Budgeting, cash management, and investor updates are well managed. Management has created buffers between operations and lending capital (OpCo vs LendingCo structure). However, some delegation gaps persist; key reports still flow directly to CTO/CEO.",
-    },
-    {
-      id: "talent-development",
-      title: "Talent Development & Retention",
-      score: 6.5,
       standard: 5.0,
-      summary: "Core internal training practices with some attrition",
+      summary: "Focused on improving livelihoods and digital inclusion",
       description:
-        "Internal training and mentoring are core practices — notably training back-end engineers to handle front-end UI work. Attrition exists (two exits in 2024), but exit transitions have been well managed. Hybrid model with mandatory office presence 2x/week ensures team cohesion in Kampala. The team is lean and high performing, but some over-reliance on senior staff limits upskilling bandwidth.",
+        "Emata actively engages in improving livelihoods by offering low-cost formal credit to underserved rural communities. Platform removes predatory lending from the value chain while promoting yield growth, formal record keeping, and climate resilience (via bundled crop insurance). MIS platform is offered for free to partners, encouraging digital inclusion. Company positions impact as central to strategy — particularly in fundraising and partnership dialogues.",
     },
     {
-      id: "organizational-structure",
-      title: "Organizational Structure",
-      score: 6.0,
+      id: "trustworthiness",
+      title: "Trustworthiness & Reputation",
+      score: 7.4,
       standard: 5.0,
-      summary: "Flat hierarchy with emerging vertical leadership",
+      summary: "Strong institutional endorsements and partner retention",
       description:
-        "Flat hierarchy; all tech and data staff report directly to CTO. Attempts are underway to create vertical leads (e.g., seniors owning MIS, BackOffice), but formal delegation is incomplete. Start-up flatness works for agility, but bottlenecks exist in core decision-making and infrastructure knowledge.",
-    },
-    {
-      id: "leadership-governance",
-      title: "Leadership & Governance",
-      score: 7.5,
-      standard: 6.0,
-      summary: "Mission-aligned founders with strong governance support",
-      description:
-        "Highly mission-aligned founders with shared history and deep contextual understanding of East African agri-finance. Governance supported by Dutch parent company and external advisors. Board participation and transparency in investor relations are strong. Leadership is realistic about weaknesses and consistently receptive to feedback and structured transformation.",
+        "Widely endorsed by institutional accelerators (Norrsken, Plug & Play), foundations, and impact investors. Partner retention rates (70%+) and ongoing feedback loops via field officers support a strong trust profile. Public-facing narratives and investor communications are consistent with operational evidence. Internal culture promotes transparency across team roles and functions, including data science and operations.",
     },
   ]
+
+  // Calculate the average score
+  const averageScore = components.reduce((sum, component) => sum + component.score, 0) / components.length
 
   // Format data for radar chart
   const radarData = components.map((component) => ({
@@ -67,19 +69,19 @@ export default function CriticalSkillsPage() {
     <div className="space-y-6">
       <div className="flex justify-between items-start">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight text-white">Critical Skills</h1>
-          <p className="text-zinc-400">Team composition, professional capacity, and management style</p>
+          <h1 className="text-2xl font-bold tracking-tight text-white">Integrity</h1>
+          <p className="text-zinc-400">Ethical standards, transparency, and regulatory compliance</p>
         </div>
         <div className="flex flex-col items-center">
           <div className="relative flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-zinc-800 to-zinc-900 shadow-lg">
             <div className="absolute inset-0.5 rounded-full bg-black"></div>
             <div className="relative flex flex-col items-center justify-center">
-              <span className="text-3xl font-bold text-white">6.9</span>
+              <span className="text-3xl font-bold text-white">7.4</span>
               <span className="text-xs text-zinc-400">out of 10</span>
             </div>
           </div>
           <div className="mt-2 max-w-[120px] text-center">
-            <p className="text-xs text-zinc-500">Above industry standard for early-stage fintech</p>
+            <p className="text-xs text-zinc-500">5/10 represents industry standard</p>
           </div>
         </div>
       </div>
@@ -189,9 +191,9 @@ export default function CriticalSkillsPage() {
         <TabsContent value="findings" className="mt-4 space-y-4">
           <Card className="border-zinc-800 bg-zinc-900">
             <CardHeader>
-              <CardTitle className="text-white">Critical Skills Assessment</CardTitle>
+              <CardTitle className="text-white">Integrity Assessment</CardTitle>
               <CardDescription className="text-zinc-400">
-                Overall findings from the critical skills evaluation
+                Overall findings from the integrity evaluation
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -202,7 +204,7 @@ export default function CriticalSkillsPage() {
                     <div className="relative flex h-24 w-24 items-center justify-center rounded-full bg-gradient-to-br from-green-900/30 to-green-800/20 shadow-lg">
                       <div className="absolute inset-1 rounded-full bg-zinc-900/80"></div>
                       <div className="relative flex flex-col items-center justify-center">
-                        <span className="text-4xl font-bold text-green-500">6.9</span>
+                        <span className="text-4xl font-bold text-green-500">7.4</span>
                         <span className="text-xs text-zinc-400">Overall Score</span>
                       </div>
                     </div>
@@ -210,11 +212,11 @@ export default function CriticalSkillsPage() {
                   <div className="flex-1">
                     <h3 className="text-xl font-semibold text-white mb-1">Overall Assessment</h3>
                     <p className="text-zinc-300">
-                      Emata exhibits above-industry strength in core leadership, domain expertise, and team development,
-                      especially for a seed-stage business operating in a complex environment.
+                      Emata demonstrates above industry average integrity with high ethical alignment, excellent
+                      regulatory practices, and transparent financial governance.
                     </p>
                     <div className="mt-2 text-xs text-zinc-500 flex items-center">
-                      <Brain className="h-3 w-3 mr-1" />
+                      <Shield className="h-3 w-3 mr-1" />
                       <span>Assessment based on 5 key components</span>
                     </div>
                   </div>
@@ -223,38 +225,28 @@ export default function CriticalSkillsPage() {
 
               <div className="space-y-4">
                 <div>
-                  <h3 className="text-sm font-medium text-zinc-200">Founder-Driven with Organizational Scaffolding</h3>
+                  <h3 className="text-sm font-medium text-zinc-200">Strong Institutional Integrity</h3>
                   <p className="mt-1 text-sm text-zinc-400">
-                    The company is founder-driven but intentionally building organizational scaffolding to scale
-                    sustainably. The current structure still reflects early-stage flatness, with reliance on key
-                    individuals (e.g., Davis for all tech streams), but the intentions to decentralize are in motion.
+                    Emata demonstrates strong institutional integrity, rooted in transparency with farmers, ethical
+                    business conduct, and full regulatory alignment. Its contracts, data practices, and lending logic
+                    reflect high ethical standards relative to peers in digital lending and agricultural finance.
                   </p>
                 </div>
 
                 <div>
-                  <h3 className="text-sm font-medium text-zinc-200">Complementary Leadership Team</h3>
+                  <h3 className="text-sm font-medium text-zinc-200">Regulatory Compliance</h3>
                   <p className="mt-1 text-sm text-zinc-400">
-                    The founding team demonstrates highly complementary skills with deep vertical and horizontal
-                    expertise across agriculture, credit, technology, and product development, positioning the company
-                    well for continued growth.
+                    The company is fully licensed under the Uganda Microfinance Regulatory Authority (UMRA) and complies
+                    with Uganda's Tier 4 Microfinance Institutions and Money Lenders Act, building long-term
+                    institutional trust.
                   </p>
                 </div>
 
                 <div>
-                  <h3 className="text-sm font-medium text-zinc-200">Strong Developer Culture</h3>
+                  <h3 className="text-sm font-medium text-zinc-200">Financial Governance</h3>
                   <p className="mt-1 text-sm text-zinc-400">
-                    Emata has cultivated a respected local developer culture with minimal turnover and a strong internal
-                    training ethos, which contributes to team stability and knowledge retention despite operating in a
-                    competitive talent market.
-                  </p>
-                </div>
-
-                <div>
-                  <h3 className="text-sm font-medium text-zinc-200">Governance and Innovation</h3>
-                  <p className="mt-1 text-sm text-zinc-400">
-                    The company benefits from strong governance culture backed by external Dutch holding and
-                    impact-aligned investors, while active DevOps, AI, and product experimentation encourage innovation
-                    throughout the organization.
+                    The separation of operational vs. lending structures, regular audits by independent firms, and clear
+                    partner engagement reinforce credibility and demonstrate strong financial governance.
                   </p>
                 </div>
               </div>
@@ -267,7 +259,7 @@ export default function CriticalSkillsPage() {
             <CardHeader>
               <CardTitle className="text-white">Key Strengths</CardTitle>
               <CardDescription className="text-zinc-400">
-                Areas where Emata demonstrates strong critical skills
+                Areas where Emata demonstrates integrity strengths
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -290,8 +282,7 @@ export default function CriticalSkillsPage() {
                     </svg>
                   </div>
                   <span>
-                    Highly complementary founding team with deep vertical and horizontal expertise across agriculture,
-                    credit, technology, and product development.
+                    Full compliance with financial and microfinance regulation builds long-term institutional trust.
                   </span>
                 </li>
                 <li className="flex gap-2">
@@ -312,8 +303,8 @@ export default function CriticalSkillsPage() {
                     </svg>
                   </div>
                   <span>
-                    Respected local developer culture with minimal turnover and strong internal training ethos,
-                    contributing to team stability and knowledge retention.
+                    Data and contract transparency at the partner and borrower level outperforms typical fintech players
+                    in similar contexts.
                   </span>
                 </li>
                 <li className="flex gap-2">
@@ -333,10 +324,7 @@ export default function CriticalSkillsPage() {
                       <path d="M20 6 9 17l-5-5" />
                     </svg>
                   </div>
-                  <span>
-                    Strong governance culture backed by external Dutch holding and impact-aligned investors, providing
-                    additional oversight and strategic guidance.
-                  </span>
+                  <span>Annual audits with no negative flags confirm strong financial governance.</span>
                 </li>
                 <li className="flex gap-2">
                   <div className="rounded-full bg-green-900/20 p-1 text-green-500">
@@ -356,8 +344,8 @@ export default function CriticalSkillsPage() {
                     </svg>
                   </div>
                   <span>
-                    Active DevOps, AI, and product experimentation that encourages innovation and continuous improvement
-                    throughout the organization.
+                    Field-level social responsibility demonstrated via operational and UX choices (e.g., interest
+                    reduction, flexible repayments, MIS access).
                   </span>
                 </li>
               </ul>
@@ -369,9 +357,7 @@ export default function CriticalSkillsPage() {
           <Card className="border-zinc-800 bg-zinc-900">
             <CardHeader>
               <CardTitle className="text-white">Recommendations</CardTitle>
-              <CardDescription className="text-zinc-400">
-                Suggested improvements for critical skills development
-              </CardDescription>
+              <CardDescription className="text-zinc-400">Suggested improvements for integrity</CardDescription>
             </CardHeader>
             <CardContent>
               <ul className="space-y-3 text-sm text-zinc-400">
@@ -394,8 +380,8 @@ export default function CriticalSkillsPage() {
                     </svg>
                   </div>
                   <span>
-                    Delegate engineering ownership for BackOffice, MIS, and Frontend to senior developers to mitigate
-                    key-person dependency and distribute technical leadership.
+                    Introduce third-party impact verification or certification (e.g., IRIS, 60 Decibels) to further
+                    institutionalize transparency.
                   </span>
                 </li>
                 <li className="flex gap-2">
@@ -417,8 +403,8 @@ export default function CriticalSkillsPage() {
                     </svg>
                   </div>
                   <span>
-                    Codify engineering and data leadership roles in preparation for multi-country scale to ensure
-                    consistent practices across expanding operations.
+                    Explore a public impact or transparency dashboard to share lending and repayment insights at
+                    community or partner level.
                   </span>
                 </li>
                 <li className="flex gap-2">
@@ -440,8 +426,7 @@ export default function CriticalSkillsPage() {
                     </svg>
                   </div>
                   <span>
-                    Formalize internal mentorship and documentation practices to reduce operational bottlenecks and
-                    facilitate knowledge transfer across the organization.
+                    Codify internal ethics and grievance escalation SOPs as the team scales beyond current leadership.
                   </span>
                 </li>
                 <li className="flex gap-2">
@@ -463,8 +448,8 @@ export default function CriticalSkillsPage() {
                     </svg>
                   </div>
                   <span>
-                    Prepare succession and transition plans for 2–3 core technical functions to mitigate risks
-                    associated with key personnel departures.
+                    Audit data-sharing practices across external partners for alignment with evolving regulatory (e.g.,
+                    cross-border data) frameworks.
                   </span>
                 </li>
               </ul>

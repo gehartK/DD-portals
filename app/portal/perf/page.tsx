@@ -1,57 +1,56 @@
 "use client"
-
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Brain } from "lucide-react"
+import { Zap } from "lucide-react"
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer, Legend } from "recharts"
 
-export default function CriticalSkillsPage() {
+export default function PerfPage() {
   const components = [
     {
-      id: "team-composition",
-      title: "Team Composition & Expertise",
-      score: 7.5,
-      standard: 6.0,
-      summary: "Highly experienced founding team with deep domain expertise",
+      id: "resource-allocation",
+      title: "Resource Allocation & Cost Efficiency",
+      score: 6.8,
+      standard: 5.0,
+      summary: "Lean operations with strict cost controls but manual overhead",
       description:
-        "The founding team is highly experienced, with deep overlap in agriculture, credit, technology, and product. Technical and data leaders (CTO, CDSO) are hands-on and strategically aligned. The core engineering team consists of full-stack developers with .NET experience, while the AI/data science team includes advanced ML and ops specialists. External leadership support from Dutch holding company and accelerators provides cross-market insight.",
+        "Emata maintains strict cost controls: separate OpCo and LendingCo structures reduce capital misuse. Resources are lean but highly utilized, with minimal redundancy and efficient capital deployment (especially around platform investments and grants). However, excessive manual data cleanup and staff overhead (e.g., in credit limit validation) slow down throughput and productivity.",
     },
     {
-      id: "management-practices",
-      title: "Management Practices",
-      score: 7.0,
-      standard: 5.5,
-      summary: "Strong execution clarity with active founder involvement",
+      id: "operational-performance",
+      title: "Operational Performance & Execution",
+      score: 6.2,
+      standard: 5.0,
+      summary: "Agile field operations but manual processes create bottlenecks",
       description:
-        "Strong execution clarity across product, lending, and data roadmap. Founders are actively involved in all strategic and operational decisions. Budgeting, cash management, and investor updates are well managed. Management has created buffers between operations and lending capital (OpCo vs LendingCo structure). However, some delegation gaps persist; key reports still flow directly to CTO/CEO.",
+        "Daily operations are agile and field-driven, with clear partner engagement loops. Execution bottlenecks persist: 30% of data entry remains manual with no SOPs for informal staff, creating quality and scaling risks. Some inefficiencies in cooperative readiness reduce real-time operational feedback loops (notably for repayment reporting and crop cycle alignment).",
     },
     {
-      id: "talent-development",
-      title: "Talent Development & Retention",
+      id: "technology-infrastructure",
+      title: "Technology Infrastructure Efficiency",
+      score: 6.6,
+      standard: 5.0,
+      summary: "Modern architecture but mid-stage MLOps maturity",
+      description:
+        "Clean, modular stack with microservices, REST APIs, and modern architecture (Blazor + Azure ML + .NET Core). Emata balances compute and storage cost through AWS (core services) and Azure (ML operations). MLOps maturity is mid-stage: manual retraining, notebook-based workflows, and ad hoc pipeline validations slow performance monitoring and update cycles.",
+    },
+    {
+      id: "quality-metrics",
+      title: "Quality Metrics (Data)",
+      score: 5.8,
+      standard: 5.0,
+      summary: "Custom data tools but high manual intervention needed",
+      description:
+        "Clear effort in managing duplicate and inconsistent data via a custom Data Cleaning App and audit tooling, but lack of standardization or automation still leads to high manual intervention. No real-time model performance tracking; model feedback loops are delayed and not reproducible without effort. 30% of data input is informally sourced and unverifiable, affecting downstream analytics and credit scoring accuracy.",
+    },
+    {
+      id: "productivity-ratios",
+      title: "Productivity Ratios",
       score: 6.5,
       standard: 5.0,
-      summary: "Core internal training practices with some attrition",
+      summary: "Strong output per field officer but onboarding inefficiencies",
       description:
-        "Internal training and mentoring are core practices — notably training back-end engineers to handle front-end UI work. Attrition exists (two exits in 2024), but exit transitions have been well managed. Hybrid model with mandatory office presence 2x/week ensures team cohesion in Kampala. The team is lean and high performing, but some over-reliance on senior staff limits upskilling bandwidth.",
-    },
-    {
-      id: "organizational-structure",
-      title: "Organizational Structure",
-      score: 6.0,
-      standard: 5.0,
-      summary: "Flat hierarchy with emerging vertical leadership",
-      description:
-        "Flat hierarchy; all tech and data staff report directly to CTO. Attempts are underway to create vertical leads (e.g., seniors owning MIS, BackOffice), but formal delegation is incomplete. Start-up flatness works for agility, but bottlenecks exist in core decision-making and infrastructure knowledge.",
-    },
-    {
-      id: "leadership-governance",
-      title: "Leadership & Governance",
-      score: 7.5,
-      standard: 6.0,
-      summary: "Mission-aligned founders with strong governance support",
-      description:
-        "Highly mission-aligned founders with shared history and deep contextual understanding of East African agri-finance. Governance supported by Dutch parent company and external advisors. Board participation and transparency in investor relations are strong. Leadership is realistic about weaknesses and consistently receptive to feedback and structured transformation.",
+        "Strong output per field officer; lean central team handles operations for over 60+ partner organizations and 100,000+ farmers. However, productivity drag is present in partner onboarding and review cycles. Data and credit teams spend non-trivial time on repeatable low-leverage tasks (credit limit approval, manual analysis, etc.).",
     },
   ]
 
@@ -63,23 +62,26 @@ export default function CriticalSkillsPage() {
     fullMark: 10,
   }))
 
+  // Calculate the average score
+  const averageScore = components.reduce((sum, component) => sum + component.score, 0) / components.length
+
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-start">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight text-white">Critical Skills</h1>
-          <p className="text-zinc-400">Team composition, professional capacity, and management style</p>
+          <h1 className="text-2xl font-bold tracking-tight text-white">Performance Efficiency</h1>
+          <p className="text-zinc-400">Optimization, waste reduction, and productivity enhancement</p>
         </div>
         <div className="flex flex-col items-center">
           <div className="relative flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-zinc-800 to-zinc-900 shadow-lg">
             <div className="absolute inset-0.5 rounded-full bg-black"></div>
             <div className="relative flex flex-col items-center justify-center">
-              <span className="text-3xl font-bold text-white">6.9</span>
+              <span className="text-3xl font-bold text-white">6.4</span>
               <span className="text-xs text-zinc-400">out of 10</span>
             </div>
           </div>
           <div className="mt-2 max-w-[120px] text-center">
-            <p className="text-xs text-zinc-500">Above industry standard for early-stage fintech</p>
+            <p className="text-xs text-zinc-500">5/10 represents industry standard</p>
           </div>
         </div>
       </div>
@@ -189,9 +191,9 @@ export default function CriticalSkillsPage() {
         <TabsContent value="findings" className="mt-4 space-y-4">
           <Card className="border-zinc-800 bg-zinc-900">
             <CardHeader>
-              <CardTitle className="text-white">Critical Skills Assessment</CardTitle>
+              <CardTitle className="text-white">Performance Efficiency Assessment</CardTitle>
               <CardDescription className="text-zinc-400">
-                Overall findings from the critical skills evaluation
+                Overall findings from the performance efficiency evaluation
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -202,7 +204,7 @@ export default function CriticalSkillsPage() {
                     <div className="relative flex h-24 w-24 items-center justify-center rounded-full bg-gradient-to-br from-green-900/30 to-green-800/20 shadow-lg">
                       <div className="absolute inset-1 rounded-full bg-zinc-900/80"></div>
                       <div className="relative flex flex-col items-center justify-center">
-                        <span className="text-4xl font-bold text-green-500">6.9</span>
+                        <span className="text-4xl font-bold text-green-500">6.4</span>
                         <span className="text-xs text-zinc-400">Overall Score</span>
                       </div>
                     </div>
@@ -210,11 +212,11 @@ export default function CriticalSkillsPage() {
                   <div className="flex-1">
                     <h3 className="text-xl font-semibold text-white mb-1">Overall Assessment</h3>
                     <p className="text-zinc-300">
-                      Emata exhibits above-industry strength in core leadership, domain expertise, and team development,
-                      especially for a seed-stage business operating in a complex environment.
+                      Emata's performance efficiency is above minimum threshold, but moderate inefficiencies are present
+                      in data quality, automation, and execution standardization.
                     </p>
                     <div className="mt-2 text-xs text-zinc-500 flex items-center">
-                      <Brain className="h-3 w-3 mr-1" />
+                      <Zap className="h-3 w-3 mr-1" />
                       <span>Assessment based on 5 key components</span>
                     </div>
                   </div>
@@ -223,38 +225,27 @@ export default function CriticalSkillsPage() {
 
               <div className="space-y-4">
                 <div>
-                  <h3 className="text-sm font-medium text-zinc-200">Founder-Driven with Organizational Scaffolding</h3>
+                  <h3 className="text-sm font-medium text-zinc-200">Strong by Early-Stage Benchmarks</h3>
                   <p className="mt-1 text-sm text-zinc-400">
-                    The company is founder-driven but intentionally building organizational scaffolding to scale
-                    sustainably. The current structure still reflects early-stage flatness, with reliance on key
-                    individuals (e.g., Davis for all tech streams), but the intentions to decentralize are in motion.
+                    Emata's operations and tech execution are strong by early-stage benchmarks but are limited by
+                    several manual processes, lack of SOPs, and bottlenecks in data and model automation.
                   </p>
                 </div>
 
                 <div>
-                  <h3 className="text-sm font-medium text-zinc-200">Complementary Leadership Team</h3>
+                  <h3 className="text-sm font-medium text-zinc-200">Resourceful but Lacking Standardization</h3>
                   <p className="mt-1 text-sm text-zinc-400">
-                    The founding team demonstrates highly complementary skills with deep vertical and horizontal
-                    expertise across agriculture, credit, technology, and product development, positioning the company
-                    well for continued growth.
+                    The team is resourceful and cost-efficient, but lacks standardization in field data collection, ML
+                    retraining, and cooperative performance verification.
                   </p>
                 </div>
 
                 <div>
-                  <h3 className="text-sm font-medium text-zinc-200">Strong Developer Culture</h3>
+                  <h3 className="text-sm font-medium text-zinc-200">Scaling Challenges</h3>
                   <p className="mt-1 text-sm text-zinc-400">
-                    Emata has cultivated a respected local developer culture with minimal turnover and a strong internal
-                    training ethos, which contributes to team stability and knowledge retention despite operating in a
-                    competitive talent market.
-                  </p>
-                </div>
-
-                <div>
-                  <h3 className="text-sm font-medium text-zinc-200">Governance and Innovation</h3>
-                  <p className="mt-1 text-sm text-zinc-400">
-                    The company benefits from strong governance culture backed by external Dutch holding and
-                    impact-aligned investors, while active DevOps, AI, and product experimentation encourage innovation
-                    throughout the organization.
+                    With growing volumes, performance drag will intensify without automation and documentation upgrades.
+                    Current manual processes that work at current scale will become significant bottlenecks as the
+                    company grows.
                   </p>
                 </div>
               </div>
@@ -267,7 +258,7 @@ export default function CriticalSkillsPage() {
             <CardHeader>
               <CardTitle className="text-white">Key Strengths</CardTitle>
               <CardDescription className="text-zinc-400">
-                Areas where Emata demonstrates strong critical skills
+                Areas where Emata demonstrates strong performance efficiency
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -289,10 +280,7 @@ export default function CriticalSkillsPage() {
                       <path d="M20 6 9 17l-5-5" />
                     </svg>
                   </div>
-                  <span>
-                    Highly complementary founding team with deep vertical and horizontal expertise across agriculture,
-                    credit, technology, and product development.
-                  </span>
+                  <span>Modular and cloud-based architecture supports long-term scale at low unit cost.</span>
                 </li>
                 <li className="flex gap-2">
                   <div className="rounded-full bg-green-900/20 p-1 text-green-500">
@@ -311,10 +299,7 @@ export default function CriticalSkillsPage() {
                       <path d="M20 6 9 17l-5-5" />
                     </svg>
                   </div>
-                  <span>
-                    Respected local developer culture with minimal turnover and strong internal training ethos,
-                    contributing to team stability and knowledge retention.
-                  </span>
+                  <span>Clear cost control discipline and well-separated financial governance reduce waste.</span>
                 </li>
                 <li className="flex gap-2">
                   <div className="rounded-full bg-green-900/20 p-1 text-green-500">
@@ -333,10 +318,7 @@ export default function CriticalSkillsPage() {
                       <path d="M20 6 9 17l-5-5" />
                     </svg>
                   </div>
-                  <span>
-                    Strong governance culture backed by external Dutch holding and impact-aligned investors, providing
-                    additional oversight and strategic guidance.
-                  </span>
+                  <span>Strong internal build capability with custom tools like Sync Service and Data Audit App.</span>
                 </li>
                 <li className="flex gap-2">
                   <div className="rounded-full bg-green-900/20 p-1 text-green-500">
@@ -355,10 +337,7 @@ export default function CriticalSkillsPage() {
                       <path d="M20 6 9 17l-5-5" />
                     </svg>
                   </div>
-                  <span>
-                    Active DevOps, AI, and product experimentation that encourages innovation and continuous improvement
-                    throughout the organization.
-                  </span>
+                  <span>Field agents and coop integrations function as cost-effective last-mile infrastructure.</span>
                 </li>
               </ul>
             </CardContent>
@@ -370,7 +349,7 @@ export default function CriticalSkillsPage() {
             <CardHeader>
               <CardTitle className="text-white">Recommendations</CardTitle>
               <CardDescription className="text-zinc-400">
-                Suggested improvements for critical skills development
+                Suggested improvements for performance efficiency
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -393,9 +372,28 @@ export default function CriticalSkillsPage() {
                       <path d="m12 5 7 7-7 7" />
                     </svg>
                   </div>
+                  <span>Develop and enforce SOPs for field data entry and partner onboarding.</span>
+                </li>
+                <li className="flex gap-2">
+                  <div className="rounded-full bg-blue-900/20 p-1 text-blue-500">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="lucide lucide-arrow-right"
+                    >
+                      <path d="M5 12h14" />
+                      <path d="m12 5 7 7-7 7" />
+                    </svg>
+                  </div>
                   <span>
-                    Delegate engineering ownership for BackOffice, MIS, and Frontend to senior developers to mitigate
-                    key-person dependency and distribute technical leadership.
+                    Automate model retraining and introduce MLOps practices (CI/CD, monitoring, reproducibility).
                   </span>
                 </li>
                 <li className="flex gap-2">
@@ -417,8 +415,7 @@ export default function CriticalSkillsPage() {
                     </svg>
                   </div>
                   <span>
-                    Codify engineering and data leadership roles in preparation for multi-country scale to ensure
-                    consistent practices across expanding operations.
+                    Introduce productivity dashboards to track time-to-loan, credit review cycles, and agent efficiency.
                   </span>
                 </li>
                 <li className="flex gap-2">
@@ -439,33 +436,7 @@ export default function CriticalSkillsPage() {
                       <path d="m12 5 7 7-7 7" />
                     </svg>
                   </div>
-                  <span>
-                    Formalize internal mentorship and documentation practices to reduce operational bottlenecks and
-                    facilitate knowledge transfer across the organization.
-                  </span>
-                </li>
-                <li className="flex gap-2">
-                  <div className="rounded-full bg-blue-900/20 p-1 text-blue-500">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="lucide lucide-arrow-right"
-                    >
-                      <path d="M5 12h14" />
-                      <path d="m12 5 7 7-7 7" />
-                    </svg>
-                  </div>
-                  <span>
-                    Prepare succession and transition plans for 2–3 core technical functions to mitigate risks
-                    associated with key personnel departures.
-                  </span>
+                  <span>Move towards semi-automated credit limit review pipeline to reduce manual workloads.</span>
                 </li>
               </ul>
             </CardContent>

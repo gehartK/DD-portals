@@ -4,10 +4,17 @@ import { useState } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { Cog, ChevronDown, ChevronUp } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { cn } from "@/lib/utils"
+import { Cog } from "lucide-react"
+import {
+  Legend,
+  PolarAngleAxis,
+  PolarGrid,
+  PolarRadiusAxis,
+  Radar,
+  RadarChart,
+  ResponsiveContainer,
+  Tooltip,
+} from "recharts"
 
 export default function OperationalExcellencePage() {
   const [expandedComponents, setExpandedComponents] = useState<Record<string, boolean>>({})
@@ -21,46 +28,63 @@ export default function OperationalExcellencePage() {
 
   const components = [
     {
-      id: "process-efficiency",
-      title: "Process Efficiency & Automation",
-      score: 4,
-      summary: "Many operational processes remain manual despite blockchain use",
+      id: "process-automation",
+      title: "Process Automation and Time",
+      score: 6,
+      standard: 5.0,
+      summary: "Manual processes in credit review, MIS sync validation, and data entry",
       description:
-        "Despite leveraging blockchain for carbon credit tracking, many of Melanin Kapital's operational processes remain manual, such as loan origination, KYC, and invoice discounting. These manual processes limit the company's ability to scale efficiently and introduce significant risk as the business expands into new regions. The lack of automation in core operational workflows is a major barrier to achieving operational excellence at scale.",
+        "While Emata uses APIs, internal microservices, and modular workflows, much of the credit limit review, MIS sync validation, and data entry remains manual. 30% of data is manually input with no SOPs for informal staff, leading to inconsistencies and avoidable cleanup work. Some automation exists in model deployment and notifications (e.g., SMS reminders), but this is not yet fully standardized.",
     },
     {
       id: "operational-scalability",
-      title: "Operational Scalability",
-      score: 4,
-      summary: "Scalability hindered by manual workflows and lack of automated systems",
+      title: "Operational Scalability and Labor Output",
+      score: 6.5,
+      standard: 5.0,
+      summary: "Lean field operations but human bottlenecks in reviews and validation",
       description:
-        "While Melanin Kapital's business model has the potential to scale, its operational scalability is hindered by the heavy reliance on manual workflows and the lack of automated systems for key operations. The company has yet to implement scalable back-end infrastructure to support growth in multiple regions, and expansion into new African markets or Europe will require a more robust operational framework to handle the increased complexity and demand.",
+        "Field operations are lean and highly scalable via cooperative partner integration and agent deployment. Team covers over 62 partners and 100K+ farmers with <25 operational staff, suggesting high efficiency per person. But human bottlenecks exist: reviews, manual risk checks, and data validation steps that cannot scale linearly without structured delegation or digital workflows.",
     },
     {
       id: "supply-chain",
-      title: "Supply Chain & Vendor Management",
-      score: 5,
-      summary: "Strong partnerships but vendor management processes still developing",
+      title: "Supply Chain and Vendor Management",
+      score: 6.8,
+      standard: 5.0,
+      summary: "Detailed vendor engagements but no systematic audit of partner data quality",
       description:
-        "Melanin Kapital has strong partnerships with Ecobank and Visa, providing access to significant infrastructure for expanding its financial services. However, the company's vendor management processes are still in development. As the company scales, it will need to strengthen its supplier relationships and create more formal service level agreements (SLAs) to ensure consistent service delivery, especially in areas like carbon credit certification and regional compliance.",
+        "Vendor (partner) engagements are detailed and include roles for loan repayment enforcement, agent training, and MIS onboarding. Contracts with partners like UGACOF and Omia show structured performance expectations, data sharing protocols, and digital touchpoints. However, there's no systematic way to audit partner-side data quality or track long-term performance improvement.",
     },
     {
       id: "risk-management",
-      title: "Risk Management & Compliance",
-      score: 5,
-      summary: "Progress in compliance but manual risk management processes",
+      title: "Risk Management",
+      score: 6.7,
+      standard: 5.0,
+      summary: "Well-articulated credit risk processes but emerging operational risk governance",
       description:
-        "Melanin Kapital has made strides in compliance by joining the Capital Markets Authority's regulatory sandbox and working with Ecobank under an MOU. However, the company's manual risk management processes and lack of formalized compliance frameworks may pose challenges as the company enters new jurisdictions with differing regulatory requirements. The company will need to automate and formalize compliance management systems to ensure scalability and minimize risk exposure.",
+        "Emata uses tiered partner risk categories, ML-powered credit scores, and portfolio ROI simulators. Formalized processes for blacklisting defaulters, grace periods, and enforcement (e.g., police letters, CRB reporting) are in place. Credit risk processes are well-articulated, but broader operational risk governance (e.g., fraud escalation, internal control audits) is still emerging.",
     },
     {
       id: "data-management",
-      title: "Data Management & Security",
-      score: 5,
-      summary: "Blockchain and IoT use but data security still developing",
+      title: "Data Management and Security",
+      score: 6.5,
+      standard: 5.0,
+      summary: "Strong in-house tools but lacks real-time error correction and SOPs",
       description:
-        "Melanin Kapital uses blockchain and IoT technologies for carbon tracking and data management, providing transparency and security in certain aspects of its operations. However, data security is still a work in progress, particularly when dealing with sensitive financial and personal data. The company needs to implement stronger data protection measures and ensure compliance with international privacy regulations (e.g., GDPR) as it scales.",
+        "Strong in-house tools (Data Cleaning App, Data Audit Service, ML update APIs) bolster data hygiene. Lack of real-time error correction, and absence of internal SOPs for MIS-to-model reconciliation, limits robustness. Access control via VPNs and VPCs is in place but lacks role-based audit logging and admin-specific session governance.",
+    },
+    {
+      id: "operational-capacity",
+      title: "Operational Capacity",
+      score: 7,
+      standard: 5.0,
+      summary: "Semi-structured rollout playbooks with capacity constraints in technical validation",
+      description:
+        "Current ops can onboard multiple new partners per quarter, with semi-structured rollout playbooks. MIS installation, agent training, and farmer engagement are handled in batches — offering scale potential. Capacity constraints are mostly visible in technical validation (credit limits, data cleaning), not fieldwork, which is relatively standardized.",
     },
   ]
+
+  // Calculate the average score
+  const averageScore = (components.reduce((sum, component) => sum + component.score, 0) / components.length).toFixed(1)
 
   return (
     <div className="space-y-6">
@@ -73,7 +97,7 @@ export default function OperationalExcellencePage() {
           <div className="relative flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-zinc-800 to-zinc-900 shadow-lg">
             <div className="absolute inset-0.5 rounded-full bg-black"></div>
             <div className="relative flex flex-col items-center justify-center">
-              <span className="text-3xl font-bold text-white">4.8</span>
+              <span className="text-3xl font-bold text-white">6.6</span>
               <span className="text-xs text-zinc-400">out of 10</span>
             </div>
           </div>
@@ -83,51 +107,124 @@ export default function OperationalExcellencePage() {
         </div>
       </div>
 
-      <Card className="border-zinc-800 bg-zinc-900">
-        <CardHeader>
-          <CardTitle className="text-white">Operational Excellence Overview</CardTitle>
-          <CardDescription className="text-zinc-400">
-            Assessment of monitoring, automation, and continuous improvement
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-4">
-            {components.map((component) => (
-              <div key={component.id} className="space-y-2">
-                <div className="flex items-center justify-between">
-                  <div className="font-medium text-zinc-200">{component.title}</div>
-                  <div className="text-sm text-zinc-400">{component.score}/10</div>
-                </div>
-                <Progress value={component.score * 10} className="h-1.5" />
-                <div className="flex items-start justify-between">
-                  <p className="text-xs text-zinc-500">{component.summary}</p>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="h-6 w-6 p-0 rounded-full"
-                    onClick={() => toggleComponent(component.id)}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {/* Left Card - Scores and Progress Bars */}
+        <Card className="border-zinc-800 bg-zinc-900">
+          <CardHeader>
+            <CardTitle className="text-white">Component Scores</CardTitle>
+            <CardDescription className="text-zinc-400">Quantitative assessment of each dimension</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="mb-6">
+              <div className="text-sm font-medium text-zinc-200 mb-2">Score Distribution vs. Industry Standard</div>
+              <div className="h-[280px] w-full">
+                <ResponsiveContainer width="100%" height="100%">
+                  <RadarChart
+                    cx="50%"
+                    cy="50%"
+                    outerRadius="70%"
+                    data={components.map((c) => ({
+                      subject: c.title.split(" ")[0],
+                      score: c.score,
+                      standard: c.standard,
+                      fullMark: 10,
+                    }))}
                   >
-                    {expandedComponents[component.id] ? (
-                      <ChevronUp className="h-4 w-4 text-zinc-400" />
-                    ) : (
-                      <ChevronDown className="h-4 w-4 text-zinc-400" />
-                    )}
-                    <span className="sr-only">{expandedComponents[component.id] ? "Collapse" : "Expand"}</span>
-                  </Button>
-                </div>
-                <div
-                  className={cn(
-                    "overflow-hidden transition-all duration-300 text-sm text-zinc-400 rounded-md bg-zinc-800/50 px-3 py-2",
-                    expandedComponents[component.id] ? "max-h-60" : "max-h-0 py-0 px-0",
-                  )}
-                >
-                  {expandedComponents[component.id] && component.description}
-                </div>
+                    <PolarGrid stroke="#3f3f46" />
+                    <PolarAngleAxis dataKey="subject" tick={{ fill: "#a1a1aa", fontSize: 12 }} />
+                    <PolarRadiusAxis
+                      angle={30}
+                      domain={[0, 10]}
+                      tick={{ fill: "#a1a1aa", fontSize: 10 }}
+                      stroke="#3f3f46"
+                    />
+                    <Radar name="Actual Score" dataKey="score" stroke="#10b981" fill="#10b981" fillOpacity={0.3} />
+                    <Radar
+                      name="Industry Standard"
+                      dataKey="standard"
+                      stroke="#6366f1"
+                      fill="#6366f1"
+                      fillOpacity={0.2}
+                    />
+                    <Legend
+                      verticalAlign="bottom"
+                      height={36}
+                      iconSize={10}
+                      wrapperStyle={{
+                        paddingTop: "10px",
+                        fontSize: "12px",
+                        color: "#a1a1aa",
+                      }}
+                    />
+                    <Tooltip
+                      content={({ active, payload }) => {
+                        if (active && payload && payload.length) {
+                          const component = components.find((c) => c.title.startsWith(payload[0].payload.subject))
+                          return (
+                            <div className="bg-zinc-800 border border-zinc-700 p-2 rounded shadow-md">
+                              <p className="text-sm font-medium text-white">{component?.title}</p>
+                              <p className="text-xs text-zinc-300">Score: {payload[0].value}/10</p>
+                              <p className="text-xs text-zinc-300">Industry Standard: {component?.standard}</p>
+                              <p className="text-xs text-zinc-400 max-w-[200px] mt-1">{component?.summary}</p>
+                            </div>
+                          )
+                        }
+                        return null
+                      }}
+                    />
+                  </RadarChart>
+                </ResponsiveContainer>
               </div>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
+            </div>
+            <div className="space-y-4">
+              {components.map((component) => (
+                <div key={component.id} className="space-y-2">
+                  <div className="flex items-center justify-between">
+                    <div className="font-medium text-zinc-200">{component.title}</div>
+                    <div className="flex items-center gap-2">
+                      <div className="text-sm text-zinc-400">{component.score}/10</div>
+                      <div className="text-xs text-zinc-500">(Standard: {component.standard})</div>
+                    </div>
+                  </div>
+                  <Progress value={component.score * 10} className="h-1.5" />
+                  <div className="flex justify-between items-center">
+                    <p className="text-xs text-zinc-500">{component.summary}</p>
+                    <div className="text-xs px-1.5 py-0.5 rounded bg-zinc-800 text-zinc-400">
+                      {component.score > component.standard ? (
+                        <span className="text-green-500">+{(component.score - component.standard).toFixed(1)}</span>
+                      ) : component.score < component.standard ? (
+                        <span className="text-red-500">{(component.score - component.standard).toFixed(1)}</span>
+                      ) : (
+                        <span className="text-zinc-400">0</span>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Right Card - Descriptions */}
+        <Card className="border-zinc-800 bg-zinc-900">
+          <CardHeader>
+            <CardTitle className="text-white">Detailed Analysis</CardTitle>
+            <CardDescription className="text-zinc-400">In-depth assessment of each component</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-6">
+              {components.map((component) => (
+                <div key={component.id} className="space-y-2">
+                  <h3 className="font-medium text-zinc-200">{component.title}</h3>
+                  <div className="text-sm text-zinc-400 rounded-md bg-zinc-800/50 px-3 py-2">
+                    {component.description}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      </div>
 
       <Tabs defaultValue="findings" className="w-full">
         <TabsList className="grid w-full grid-cols-3 bg-zinc-800">
@@ -145,39 +242,58 @@ export default function OperationalExcellencePage() {
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
-              <Alert className="bg-zinc-800 border-zinc-700">
-                <Cog className="h-4 w-4" />
-                <AlertTitle>Overall Score: 4.8/10</AlertTitle>
-                <AlertDescription>
-                  Melanin Kapital faces challenges in operational excellence due to manual processes and limited
-                  scalable infrastructure, despite innovative technology use and strategic partnerships.
-                </AlertDescription>
-              </Alert>
+              {/* Enhanced Overall Score Element */}
+              <div className="bg-gradient-to-r from-zinc-800 via-zinc-800/80 to-zinc-800 border-l-4 border-green-500 rounded-lg p-4 mb-6">
+                <div className="flex items-center gap-4">
+                  <div className="flex-shrink-0">
+                    <div className="relative flex h-24 w-24 items-center justify-center rounded-full bg-gradient-to-br from-green-900/30 to-green-800/20 shadow-lg">
+                      <div className="absolute inset-1 rounded-full bg-zinc-900/80"></div>
+                      <div className="relative flex flex-col items-center justify-center">
+                        <span className="text-4xl font-bold text-green-500">6.6</span>
+                        <span className="text-xs text-zinc-400">Overall Score</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-xl font-semibold text-white mb-1">Overall Assessment</h3>
+                    <p className="text-zinc-300">
+                      Emata's operations are mature for its stage, with evident strengths in partner-driven scalability
+                      and risk containment. However, its reliance on informal, manual inputs without SOPs, and
+                      semi-structured processes in model retraining and partner validation, introduces operational
+                      fragility.
+                    </p>
+                    <div className="mt-2 text-xs text-zinc-500 flex items-center">
+                      <Cog className="h-3 w-3 mr-1" />
+                      <span>Assessment based on 6 key components</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
               <div className="space-y-4">
                 <div>
                   <h3 className="text-sm font-medium text-zinc-200">Manual Processes Limit Efficiency</h3>
                   <p className="mt-1 text-sm text-zinc-400">
-                    Despite some use of advanced technologies like blockchain, many core operational processes remain
-                    manual, significantly impacting the company's process efficiency and its ability to scale quickly
-                    and securely.
+                    While Emata uses APIs and microservices, significant portions of credit limit review, MIS sync
+                    validation, and data entry remain manual. 30% of data is manually input with no SOPs for informal
+                    staff, leading to inconsistencies and cleanup work.
                   </p>
                 </div>
 
                 <div>
-                  <h3 className="text-sm font-medium text-zinc-200">Operational Scalability Constraints</h3>
+                  <h3 className="text-sm font-medium text-zinc-200">Operational Scalability Challenges</h3>
                   <p className="mt-1 text-sm text-zinc-400">
-                    Melanin Kapital is not yet equipped with automated systems or scalable infrastructure, which are
-                    essential for handling increased operational complexity as it expands into new markets.
+                    Field operations are lean and scalable, but human bottlenecks exist in reviews, manual risk checks,
+                    and data validation steps that cannot scale linearly without structured delegation or digital
+                    workflows.
                   </p>
                 </div>
 
                 <div>
-                  <h3 className="text-sm font-medium text-zinc-200">Lack of Formalized Risk & Compliance Systems</h3>
+                  <h3 className="text-sm font-medium text-zinc-200">Process Gaps Will Limit Growth</h3>
                   <p className="mt-1 text-sm text-zinc-400">
-                    Risk management and compliance processes are still manual, leaving the company vulnerable as it
-                    scales. The regulatory landscape in each market will require automated and formal compliance
-                    management to ensure long-term viability.
+                    As the company grows across regions and crop categories, process gaps in SOPs, model retraining, and
+                    partner validation will limit efficiency and increase error rates if not addressed.
                   </p>
                 </div>
               </div>
@@ -190,7 +306,7 @@ export default function OperationalExcellencePage() {
             <CardHeader>
               <CardTitle className="text-white">Key Strengths</CardTitle>
               <CardDescription className="text-zinc-400">
-                Areas where Melanin Kapital demonstrates operational excellence strengths
+                Areas where Emata demonstrates operational excellence strengths
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -212,10 +328,45 @@ export default function OperationalExcellencePage() {
                       <path d="M20 6 9 17l-5-5" />
                     </svg>
                   </div>
-                  <span>
-                    Partnerships with Major Institutions: Melanin Kapital has strategic alliances with Ecobank and Visa,
-                    giving it access to established infrastructure for financial services and expansion potential.
-                  </span>
+                  <span>Scalable field model using cooperative infrastructure and certified agent frameworks.</span>
+                </li>
+                <li className="flex gap-2">
+                  <div className="rounded-full bg-green-900/20 p-1 text-green-500">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="lucide lucide-check"
+                    >
+                      <path d="M20 6 9 17l-5-5" />
+                    </svg>
+                  </div>
+                  <span>Clear contracts and vendor accountability via repayment and disbursement logic.</span>
+                </li>
+                <li className="flex gap-2">
+                  <div className="rounded-full bg-green-900/20 p-1 text-green-500">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="lucide lucide-check"
+                    >
+                      <path d="M20 6 9 17l-5-5" />
+                    </svg>
+                  </div>
+                  <span>Internal tools developed for data auditing and cleaning signal strong process ownership.</span>
                 </li>
                 <li className="flex gap-2">
                   <div className="rounded-full bg-green-900/20 p-1 text-green-500">
@@ -235,9 +386,7 @@ export default function OperationalExcellencePage() {
                     </svg>
                   </div>
                   <span>
-                    Innovative Use of Blockchain: The company has a forward-looking approach by integrating blockchain
-                    and IoT into its operations, particularly in tracking carbon credits, which provides a level of
-                    transparency and security.
+                    High labor productivity, with team coverage &gt;4,000 farmers per operations staff member.
                   </span>
                 </li>
               </ul>
@@ -273,10 +422,28 @@ export default function OperationalExcellencePage() {
                       <path d="m12 5 7 7-7 7" />
                     </svg>
                   </div>
+                  <span>Implement and enforce basic SOPs for all informal field data inputs and agent operations.</span>
+                </li>
+                <li className="flex gap-2">
+                  <div className="rounded-full bg-blue-900/20 p-1 text-blue-500">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="lucide lucide-arrow-right"
+                    >
+                      <path d="M5 12h14" />
+                      <path d="m12 5 7 7-7 7" />
+                    </svg>
+                  </div>
                   <span>
-                    Automate Core Processes: Melanin Kapital must prioritize the automation of key operational
-                    workflows, including loan origination, KYC, and invoice discounting, to eliminate bottlenecks and
-                    improve efficiency. This will be critical as the company scales operations.
+                    Automate partner data validation, especially post-sync MIS verification and credit review triage.
                   </span>
                 </li>
                 <li className="flex gap-2">
@@ -298,9 +465,8 @@ export default function OperationalExcellencePage() {
                     </svg>
                   </div>
                   <span>
-                    Develop Scalable Infrastructure: To support expansion, the company should invest in scalable
-                    back-end systems that can handle increased transaction volumes, cross-border operations, and
-                    compliance management without introducing manual intervention.
+                    Define and codify internal risk protocols, particularly for process, fraud, and technical
+                    escalations.
                   </span>
                 </li>
                 <li className="flex gap-2">
@@ -322,58 +488,7 @@ export default function OperationalExcellencePage() {
                     </svg>
                   </div>
                   <span>
-                    Strengthen Data Security & Compliance: The company should invest in stronger data protection
-                    measures to ensure it meets international standards and regional regulations (e.g., GDPR, local data
-                    laws). Automating compliance tracking will help mitigate the risk of non-compliance as the company
-                    enters new markets.
-                  </span>
-                </li>
-                <li className="flex gap-2">
-                  <div className="rounded-full bg-blue-900/20 p-1 text-blue-500">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="lucide lucide-arrow-right"
-                    >
-                      <path d="M5 12h14" />
-                      <path d="m12 5 7 7-7 7" />
-                    </svg>
-                  </div>
-                  <span>
-                    Improve Vendor Management: As the company expands, formalizing vendor management processes will be
-                    crucial. This includes establishing service level agreements (SLAs) with key partners to ensure
-                    consistent service and timely delivery of products and services across markets.
-                  </span>
-                </li>
-                <li className="flex gap-2">
-                  <div className="rounded-full bg-blue-900/20 p-1 text-blue-500">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="lucide lucide-arrow-right"
-                    >
-                      <path d="M5 12h14" />
-                      <path d="m12 5 7 7-7 7" />
-                    </svg>
-                  </div>
-                  <span>
-                    Formalize Risk Management Systems: Implementing automated risk management tools and formalizing
-                    compliance procedures will be critical for managing regulatory risks and operational risk as the
-                    company expands into new regions.
+                    Expand ops QA to include agent performance tracking dashboards and partner data reliability scores.
                   </span>
                 </li>
               </ul>

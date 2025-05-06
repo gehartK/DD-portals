@@ -23,7 +23,6 @@ import {
   Home,
   DollarSign,
   Server,
-  Printer,
   ImageIcon,
   Archive,
 } from "lucide-react"
@@ -105,13 +104,13 @@ export default function PortalLayout({
     { href: "/portal", label: "Summary", icon: <Home className="h-4 w-4" /> },
     { href: "/portal/critical-skills", label: "Critical Skills", icon: <Brain className="h-4 w-4" /> },
     { href: "/portal/key-metrics", label: "Key Metrics", icon: <BarChart3 className="h-4 w-4" /> },
-    { href: "/portal/strategic-growth", label: "Strategic Growth", icon: <LineChart className="h-4 w-4" /> },
-    { href: "/portal/integrity", label: "Integrity", icon: <Shield className="h-4 w-4" /> },
-    { href: "/portal/performance-efficiency", label: "Performance Efficiency", icon: <Zap className="h-4 w-4" /> },
+    { href: "/portal/sg", label: "Strategic Growth", icon: <LineChart className="h-4 w-4" /> },
+    { href: "/portal/int", label: "Integrity", icon: <Shield className="h-4 w-4" /> },
+    { href: "/portal/perf", label: "Performance Efficiency", icon: <Zap className="h-4 w-4" /> },
     { href: "/portal/operational-excellence", label: "Operational Excellence", icon: <Cog className="h-4 w-4" /> },
     { href: "/portal/data-security", label: "Solution Components", icon: <Database className="h-4 w-4" /> },
     { href: "/portal/reliability", label: "Reliability", icon: <Target className="h-4 w-4" /> },
-    { href: "/portal/cost-optimization", label: "Cost Optimization", icon: <PieChart className="h-4 w-4" /> },
+    { href: "/portal/co", label: "Cost Optimization", icon: <PieChart className="h-4 w-4" /> },
   ]
 
   // Combine all pages for batch export
@@ -393,10 +392,10 @@ export default function PortalLayout({
       } catch (error) {
         console.error("Batch export error:", error)
 
-        // Remove progress modal if it exists
+        // Safely remove progress modal if it exists
         const existingModal = document.querySelector(".print-instructions-modal")
-        if (existingModal) {
-          document.body.removeChild(existingModal)
+        if (existingModal && existingModal.parentNode) {
+          existingModal.parentNode.removeChild(existingModal)
         }
 
         // Show error modal
@@ -415,11 +414,19 @@ export default function PortalLayout({
         document.body.appendChild(errorModal)
 
         document.getElementById("close-error")?.addEventListener("click", () => {
-          document.body.removeChild(errorModal)
+          if (errorModal.parentNode) {
+            errorModal.parentNode.removeChild(errorModal)
+          }
         })
       } finally {
         setIsBatchExporting(false)
         setExportProgress({ current: 0, total: 0, page: "" })
+
+        // Safely remove any remaining modals
+        const progressModal = document.querySelector(".print-instructions-modal")
+        if (progressModal && progressModal.parentNode) {
+          progressModal.parentNode.removeChild(progressModal)
+        }
       }
     })
 
@@ -589,14 +596,19 @@ export default function PortalLayout({
         document.body.appendChild(successModal)
 
         document.getElementById("close-success")?.addEventListener("click", () => {
-          document.body.removeChild(successModal)
+          if (successModal.parentNode) {
+            successModal.parentNode.removeChild(successModal)
+          }
           resetContentAfterExport()
         })
       } catch (error) {
         console.error("Export error:", error)
 
-        // Remove progress modal
-        document.body.removeChild(progressModal)
+        // Safely remove progress modal
+        const progressModal = document.querySelector(".print-instructions-modal")
+        if (progressModal && progressModal.parentNode) {
+          progressModal.parentNode.removeChild(progressModal)
+        }
 
         // Show error modal
         const errorModal = document.createElement("div")
@@ -613,7 +625,9 @@ export default function PortalLayout({
         document.body.appendChild(errorModal)
 
         document.getElementById("close-error")?.addEventListener("click", () => {
-          document.body.removeChild(errorModal)
+          if (errorModal.parentNode) {
+            errorModal.parentNode.removeChild(errorModal)
+          }
           resetContentAfterExport()
         })
       } finally {
@@ -765,7 +779,9 @@ export default function PortalLayout({
   const resetContentAfterPrint = () => {
     // Remove the temporary header
     const header = document.querySelector(".print-header")
-    header?.parentNode?.removeChild(header)
+    if (header && header.parentNode) {
+      header.parentNode.removeChild(header)
+    }
 
     // Reset tab panels visibility
     const tabsContents = document.querySelectorAll('[role="tabpanel"]')
@@ -944,25 +960,6 @@ export default function PortalLayout({
                 </TooltipTrigger>
                 <TooltipContent>
                   <p>Export to PNG</p>
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    className="text-zinc-400 hover:text-white hover:bg-zinc-800"
-                    onClick={handleExportToPDF}
-                    disabled={isExporting || isBatchExporting}
-                  >
-                    <Printer className="h-5 w-5" />
-                    <span className="sr-only">Export to PDF</span>
-                  </Button>
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>Export to PDF</p>
                 </TooltipContent>
               </Tooltip>
             </TooltipProvider>
